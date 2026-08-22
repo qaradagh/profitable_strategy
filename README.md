@@ -5,6 +5,8 @@ A quantitative trading setup built and validated on the price data in
 commission and overnight CFD financing**, with every signal filled on the bar
 *after* it is generated.
 
+> فارسی: [`README.fa.md`](README.fa.md)
+
 ---
 
 ## The core idea

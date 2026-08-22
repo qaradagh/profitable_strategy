@@ -1,7 +1,7 @@
 <title>Asia-Session Gold</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap">
 <style>
 :root{
   --surface:#F4F5F7; --panel:#FFFFFF; --panel-2:#EDEFF3;
@@ -101,16 +101,17 @@ section:last-of-type{border-bottom:0}
 /* ---------- tables ---------- */
 .tblwrap{overflow-x:auto;border:1px solid var(--rule);border-radius:12px;background:var(--panel);box-shadow:var(--shadow)}
 table{border-collapse:collapse;width:100%;font-size:.875rem}
-th,td{padding:11px 15px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--rule)}
-th:first-child,td:first-child{text-align:left}
+th,td{padding:11px 15px;text-align:end;white-space:nowrap;border-bottom:1px solid var(--rule)}
+th:first-child,td:first-child{text-align:start}
 thead th{font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:600;background:var(--panel-2)}
 tbody tr:last-child td{border-bottom:0}
 td.num{font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums}
 tr.mark td{background:var(--brass-wash);font-weight:600}
 tr.mark td:first-child{box-shadow:inset 3px 0 0 var(--brass)}
+[dir="rtl"] tr.mark td:first-child{box-shadow:inset -3px 0 0 var(--brass)}
 .pos{color:var(--pos)} .neg{color:var(--neg)}
 .meter{display:inline-block;width:74px;height:7px;border-radius:4px;background:var(--panel-2);
-       vertical-align:middle;margin-left:9px;overflow:hidden;border:1px solid var(--rule)}
+       vertical-align:middle;margin-inline-start:9px;overflow:hidden;border:1px solid var(--rule)}
 .meter i{display:block;height:100%;background:var(--neg)}
 
 /* ---------- rules cards ---------- */
@@ -124,9 +125,9 @@ tr.mark td:first-child{box-shadow:inset 3px 0 0 var(--brass)}
 .rule dd{margin:0;color:var(--ink)}
 
 /* ---------- callouts ---------- */
-.note{border-left:3px solid var(--brass);background:var(--brass-wash);padding:16px 20px;border-radius:0 8px 8px 0;margin:26px 0}
+.note{border-inline-start:3px solid var(--brass);background:var(--brass-wash);padding:16px 20px;border-start-end-radius:8px;border-end-end-radius:8px;margin:26px 0}
 .note p:last-child{margin-bottom:0}
-.warn{border-left:3px solid var(--neg);background:color-mix(in srgb,var(--neg) 9%,transparent);padding:16px 20px;border-radius:0 8px 8px 0;margin:26px 0}
+.warn{border-inline-start:3px solid var(--neg);background:color-mix(in srgb,var(--neg) 9%,transparent);padding:16px 20px;border-start-end-radius:8px;border-end-end-radius:8px;margin:26px 0}
 .warn p:last-child{margin-bottom:0}
 .checks{list-style:none;padding:0;margin:0;display:grid;gap:13px}
 .checks li{display:flex;gap:13px;align-items:flex-start;font-size:.93rem;line-height:1.55}
@@ -140,6 +141,39 @@ tr.mark td:first-child{box-shadow:inset 3px 0 0 var(--brass)}
 #tip b{font-weight:700}
 .hit{cursor:crosshair}
 footer{padding:44px 0 64px;color:var(--ink-3);font-size:.83rem}
+
+/* ---------- bilingual shell ---------- */
+.pane[hidden]{display:none}
+.chart{direction:ltr}          /* axes and time always read left-to-right */
+.langbar{position:sticky;top:0;z-index:40;display:flex;justify-content:center;gap:0;direction:ltr;
+  padding:10px 0;background:color-mix(in srgb,var(--surface) 88%,transparent);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.langbar .seg{display:flex;border:1px solid var(--rule-strong);border-radius:999px;overflow:hidden;background:var(--panel)}
+.langbar button{appearance:none;border:0;background:transparent;cursor:pointer;
+  padding:6px 17px;font-size:.78rem;font-weight:600;letter-spacing:.05em;color:var(--ink-3);
+  font-family:"JetBrains Mono",ui-monospace,monospace;transition:background .15s,color .15s}
+.langbar button[aria-pressed="true"]{background:var(--brass);color:#fff}
+.langbar button:not([aria-pressed="true"]):hover{color:var(--ink)}
+
+/* Persian: Vazirmatn throughout, on exactly the same colour tokens as the Latin pane */
+[lang="fa"]{font-family:"Vazirmatn",ui-sans-serif,system-ui,"Segoe UI",Tahoma,sans-serif;
+  font-size:16.5px;line-height:1.95}
+[lang="fa"] h1,[lang="fa"] h2,[lang="fa"] h3{
+  font-family:"Vazirmatn",ui-sans-serif,system-ui,Tahoma,sans-serif;letter-spacing:0}
+[lang="fa"] h1{line-height:1.4;font-size:clamp(1.95rem,5vw,3.15rem);font-weight:800}
+[lang="fa"] h2{line-height:1.55;font-size:clamp(1.4rem,2.9vw,1.95rem);font-weight:700}
+[lang="fa"] .hero h1 em{font-style:normal;font-weight:800}
+[lang="fa"] h3{line-height:1.7}
+[lang="fa"] .lede{font-size:1.1rem;line-height:1.9}
+[lang="fa"] .eyebrow,[lang="fa"] .pill,[lang="fa"] .kpi .k,[lang="fa"] .rule dt,
+[lang="fa"] thead th,[lang="fa"] .rule .w{letter-spacing:0;font-family:"Vazirmatn",sans-serif}
+[lang="fa"] .kpi .v,[lang="fa"] td.num,[lang="fa"] .mono{font-family:"JetBrains Mono",monospace;direction:ltr;display:inline-block}
+[lang="fa"] td.num{display:table-cell}
+[lang="fa"] .shead .num{font-family:"JetBrains Mono",monospace}
+[lang="fa"] .checks li{line-height:1.85}
+[lang="fa"] .rule dl{gap:9px 14px}
+[lang="fa"] .figtitle,[lang="fa"] .figsub,[lang="fa"] .figcap{line-height:1.8}
+[lang="fa"] bdi{direction:ltr;unicode-bidi:isolate}
 @media (max-width:640px){
   body{font-size:16px}
   .wrap{padding:0 20px}
@@ -149,6 +183,14 @@ footer{padding:44px 0 64px;color:var(--ink-3);font-size:.83rem}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 :focus-visible{outline:2px solid var(--brass);outline-offset:2px;border-radius:3px}
 </style>
+
+<div class="langbar">
+  <div class="seg" role="group" aria-label="Language / زبان">
+    <button id="btn-en" type="button" aria-pressed="true" lang="en">English</button>
+    <button id="btn-fa" type="button" aria-pressed="false" lang="fa">فارسی</button>
+  </div>
+</div>
+<div id="pane-en" class="pane" lang="en" dir="ltr">
 <div class="wrap">
 
 <header class="hero">
@@ -186,7 +228,7 @@ footer{padding:44px 0 64px;color:var(--ink-3);font-size:.83rem}
   <div class="panel">
     <div class="figtitle">Gold return by hour of the New York day</div>
     <div class="figsub">Mean bar return in basis points &middot; H1 data, 2023&ndash;2026 &middot; 939 sessions</div>
-    <div class="chart" id="c-hours"></div>
+    <div class="chart" id="c-hours-en"></div>
     <div class="figcap col" style="margin-left:0">
       The 18:00 bar returns <span class="mono">+4.73 bps</span>; the next-largest hour manages
       <span class="mono">1.50</span>, and the day's average outside it is near zero. On 5-minute
@@ -212,7 +254,7 @@ footer{padding:44px 0 64px;color:var(--ink-3);font-size:.83rem}
       <span><i style="background:var(--brass)"></i>Session bar &mdash; 18:00 NY</span>
       <span><i style="background:var(--blue)"></i>All other bars</span>
     </div>
-    <div class="chart" id="c-years"></div>
+    <div class="chart" id="c-years-en"></div>
     <div class="figcap col" style="margin-left:0">
       Pooled: session bar <span class="mono">+5.93 bps</span> (t&nbsp;=&nbsp;9.22, n&nbsp;=&nbsp;3,505)
       against <span class="mono">&minus;0.34 bps</span> (t&nbsp;=&nbsp;&minus;1.09, n&nbsp;=&nbsp;17,544)
@@ -288,12 +330,12 @@ footer{padding:44px 0 64px;color:var(--ink-3);font-size:.83rem}
   <div class="panel">
     <div class="figtitle">Equity curve</div>
     <div class="figsub">Growth of 1.00 &middot; unlevered &middot; May 2017 &ndash; Aug 2026</div>
-    <div class="chart" id="c-eq"></div>
+    <div class="chart" id="c-eq-en"></div>
   </div>
   <div class="panel">
     <div class="figtitle">Drawdown</div>
     <div class="figsub">Distance below the running peak, per cent</div>
-    <div class="chart" id="c-dd"></div>
+    <div class="chart" id="c-dd-en"></div>
   </div>
   <div class="col kpis" style="margin-top:26px">
     <div class="kpi"><div class="v">6.05<span style="font-size:1rem">%</span></div><div class="k">CAGR</div><div class="s">at 1&times;</div></div>
@@ -317,7 +359,7 @@ footer{padding:44px 0 64px;color:var(--ink-3);font-size:.83rem}
         <th>Leverage</th><th>Per month</th><th>CAGR</th><th>Volatility</th>
         <th>Max drawdown</th><th>Worst month</th>
       </tr></thead>
-      <tbody id="t-frontier"></tbody>
+      <tbody id="t-frontier-en"></tbody>
     </table>
   </div>
   <div class="col">
@@ -377,7 +419,7 @@ footer{padding:44px 0 64px;color:var(--ink-3);font-size:.83rem}
   <div class="panel">
     <div class="figtitle">Sharpe against transaction cost</div>
     <div class="figsub">Cost multiple applied to spread, slippage and commission on every symbol</div>
-    <div class="chart" id="c-cost"></div>
+    <div class="chart" id="c-cost-en"></div>
   </div>
   <div class="col">
     <p style="margin-top:26px">
@@ -459,7 +501,7 @@ footer{padding:44px 0 64px;color:var(--ink-3);font-size:.83rem}
     <div class="tblwrap">
       <table>
         <thead><tr><th>3-year block</th><th>Sharpe</th><th>CAGR</th><th>Max drawdown</th></tr></thead>
-        <tbody id="t-blocks"></tbody>
+        <tbody id="t-blocks-en"></tbody>
       </table>
     </div>
   </div>
@@ -475,6 +517,343 @@ footer{padding:44px 0 64px;color:var(--ink-3);font-size:.83rem}
 
 </div>
 <div id="tip" role="status" aria-live="polite"></div>
+</div>
+<div id="pane-fa" class="pane" lang="fa" dir="rtl" hidden>
+<div class="wrap">
+
+<header class="hero">
+  <div class="col">
+    <div class="tag">
+      <span class="pill brass">XAUUSD</span>
+      <span class="pill">۱۳.۶ سال تست شده</span>
+      <span class="pill">پس از تمام هزینه‌ها</span>
+    </div>
+    <h1>طلا سودش را در <em>یک ساعت</em> از شبانه‌روز می‌سازد.</h1>
+    <p class="lede">
+      در ۳٬۵۰۵ نشست معاملاتی از سال ۲۰۱۳ تا امروز، کندل چهارساعته‌ای که در لحظهٔ
+      رول‌اوور روزانه — ساعت ۱۸:۰۰ نیویورک — باز می‌شود، به‌طور میانگین
+      <strong><bdi>+۵.۹۳</bdi> واحد پایه</strong> بازده داده است. میانگین همهٔ کندل‌های دیگرِ
+      روز <strong><bdi>−۰.۳۴</bdi> واحد پایه</strong> است. این صفحه شواهد، قوانین معاملاتی،
+      و شرح صادقانهٔ چیزهایی است که می‌تواند این ستاپ را از کار بیندازد.
+    </p>
+  </div>
+  <div class="col kpis">
+    <div class="kpi hl"><div class="v">9.22</div><div class="k">آمارهٔ t</div><div class="s">‏۳٬۵۰۵ نشست</div></div>
+    <div class="kpi hl"><div class="v">14/14</div><div class="k">سال مثبت</div><div class="s">‏۲۰۱۳ تا ۲۰۲۶</div></div>
+    <div class="kpi"><div class="v">1.45</div><div class="k">نسبت شارپ</div><div class="s">بدون اهرم، پس از هزینه</div></div>
+    <div class="kpi"><div class="v">8.6</div><div class="k">معامله در هفته</div><div class="s">‏۴۴۹ در سال</div></div>
+  </div>
+</header>
+
+<section>
+  <div class="col">
+    <div class="shead"><span class="num">۰۱</span><h2>کل ماجرا در ساعت است</h2></div>
+    <p class="sub">
+      میانگین بازده هر کندل یک‌ساعتهٔ طلا بر حسب ساعت نیویورک. یک کندل شبیه بقیه نیست.
+      بازار بین ساعت ۱۷:۰۰ تا ۱۸:۰۰ بسته است — این همان وقفهٔ رول‌اوور روزانه است، و
+      کندلی که بلافاصله پس از آن باز می‌شود، همان معامله است.
+    </p>
+  </div>
+  <div class="panel">
+    <div class="figtitle">بازده طلا بر حسب ساعت روز معاملاتی نیویورک</div>
+    <div class="figsub">میانگین بازده کندل بر حسب واحد پایه · دادهٔ یک‌ساعته، ۲۰۲۳ تا ۲۰۲۶ · ۹۳۹ نشست</div>
+    <div class="chart" id="c-hours-fa"></div>
+    <div class="figcap col" style="margin-inline-start:0">
+      کندل ۱۸:۰۰ بازده <span class="mono">+4.73</span> واحد پایه دارد؛ بزرگ‌ترین ساعتِ بعدی
+      تنها به <span class="mono">1.50</span> می‌رسد و میانگین بقیهٔ روز نزدیک صفر است.
+      روی دادهٔ پنج‌دقیقه‌ای، <span class="mono">+4.0</span> واحد از این مقدار در
+      <em>پنج دقیقهٔ نخست</em> رخ می‌دهد.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="col">
+    <div class="shead"><span class="num">۰۲</span><h2>در تک‌تک سال‌ها برقرار بوده</h2></div>
+    <p class="sub">
+      این اثر روی کل نمونه اندازه‌گیری شده، پس آزمون صادقانه این است که ببینیم آیا یک
+      دورهٔ خاص دارد همهٔ بار را به دوش می‌کشد یا نه. با تفکیک ۱۳.۶ سال دادهٔ چهارساعته
+      به «کندل نشست» و «بقیهٔ کندل‌ها»: کندل نشست در هر چهارده سال تقویمی مثبت بوده،
+      از جمله در ۲۰۲۲ که خودِ طلا عملاً بی‌حرکت بود.
+    </p>
+  </div>
+  <div class="panel">
+    <div class="figtitle">کندل نشست در برابر بقیهٔ روز</div>
+    <div class="figsub">میانگین بازده کندل بر حسب واحد پایه، به تفکیک سال · دادهٔ چهارساعته، ۲۰۱۳ تا ۲۰۲۶</div>
+    <div class="legend">
+      <span><i style="background:var(--brass)"></i>کندل نشست — ۱۸:۰۰ نیویورک</span>
+      <span><i style="background:var(--blue)"></i>سایر کندل‌ها</span>
+    </div>
+    <div class="chart" id="c-years-fa"></div>
+    <div class="figcap col" style="margin-inline-start:0">
+      روی کل نمونه: کندل نشست <span class="mono">+5.93</span> واحد پایه
+      (<bdi>t = 9.22</bdi>، <bdi>n = 3,505</bdi>) در برابر <span class="mono">−0.34</span> واحد پایه
+      (<bdi>t = −1.09</bdi>، <bdi>n = 17,544</bdi>) برای همهٔ کندل‌های دیگر. همین آزمون روی US500، US100،
+      US30 و چهار جفت‌ارز، آمارهٔ t بین <bdi>−۱.۴</bdi> تا <bdi>+۱.۱</bdi> می‌دهد — یعنی هیچ.
+    </div>
+  </div>
+  <div class="col">
+    <div class="note">
+      <p><strong>چرا باید چنین چیزی وجود داشته باشد.</strong> این یک اثرِ جریانِ سفارش است،
+      نه یک الگوی نموداری. ساعات آسیا زمانی است که تقاضای فیزیکی طلا وارد بازار می‌شود:
+      بورس طلای شانگهای باز می‌شود و پالایشگاه‌ها، طلاسازان و بانک‌های مرکزی آسیایی در حجم
+      بالا خرید می‌کنند — درست مقابل دفترِ معاملاتی دیلرهای لندن و کامکس که پوزیشن‌هایشان
+      را تا پایان روز آمریکا بسته‌اند. دیلرهایی که از بعدازظهر آمریکا فروشنده مانده‌اند،
+      مجبور می‌شوند در همین تقاضا پوشش بگیرند. تصویر آینه‌ای همین پدیده — افت طلا به سمت
+      فیکسینگ بعدازظهر لندن — سال‌هاست در ادبیات این فلز مستند شده است. جریانی که به ساعت
+      بازگشایی یک بازار گره خورده، مثل یک الگوی تکنیکال از بین نمی‌رود.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="col">
+    <div class="shead"><span class="num">۰۳</span><h2>قوانین معاملاتی</h2></div>
+    <p class="sub">
+      یک بخش کار اصلی را انجام می‌دهد و دو بخش دیگر منبع سود را متنوع می‌کنند. بخش‌های
+      B و C به‌تنهایی ضعیف‌اند (شارپ ۰.۳ تا ۰.۵) اما همبستگی‌شان با طلا تقریباً صفر است
+      (<bdi>−۰.۰۱</bdi> تا <bdi>+۰.۰۷</bdi>)، پس بدون رقیق‌کردن لبهٔ اصلی، پایداری اضافه می‌کنند.
+    </p>
+  </div>
+  <div class="rules">
+    <div class="rule core">
+      <div class="w">۸۵٪ ریسک · هسته</div>
+      <h3>A · نشست آسیایی طلا</h3>
+      <dl>
+        <dt>بازار</dt><dd>XAUUSD، فقط خرید</dd>
+        <dt>ورود</dt><dd>در باز شدن <strong>۱۸:۰۰ نیویورک</strong><br><span class="mono" style="font-size:.8rem;color:var(--ink-3)">22:00 UTC تابستان / 23:00 زمستان</span></dd>
+        <dt>خروج</dt><dd>‏۲۱:۰۰ نیویورک — سه ساعت بعد</dd>
+        <dt>حذف</dt><dd>بازگشایی یکشنبه</dd>
+        <dt>حد ضرر</dt><dd>‏۴ برابر ATR(20) — فقط بیمه</dd>
+        <dt>حجم</dt><dd>بر پایهٔ نوسان معکوس</dd>
+      </dl>
+    </div>
+    <div class="rule">
+      <div class="w">۷.۵٪ ریسک</div>
+      <h3>B · بازگشت به میانگین شاخص‌ها</h3>
+      <dl>
+        <dt>بازار</dt><dd>‏US500، US100، US30 روی چهارساعته</dd>
+        <dt>ورود</dt><dd>‏RSI(2) کمتر از ۲۰ <em>و</em> قیمت بالای SMA(200)</dd>
+        <dt>خروج</dt><dd>‏RSI(2) بالای ۷۰، یا پس از ۲۴ کندل</dd>
+        <dt>چرا</dt><dd>خودهمبستگی بازده روزانهٔ شاخص‌ها بین <bdi>−۰.۰۹</bdi> تا <bdi>−۰.۱۲</bdi> است؛ نبودِ کمیسیون روی شاخص‌ها گردش بالای معاملات را ممکن می‌کند</dd>
+      </dl>
+    </div>
+    <div class="rule">
+      <div class="w">۷.۵٪ ریسک</div>
+      <h3>C · چرخش پایان ماه</h3>
+      <dl>
+        <dt>بازار</dt><dd>‏US500، US100، US30 روی روزانه</dd>
+        <dt>بازه</dt><dd>از ۴ نشست مانده به پایان ماه تا ۳ نشست پس از آن</dd>
+        <dt>چرا</dt><dd>‏+۷.۲ واحد پایه در روز داخل بازه در برابر <bdi>+۰.۹</bdi> بیرون آن، روی US500 از ۱۹۹۹؛ ورود همزمان جریان حقوق و صندوق‌های شاخصی</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="col">
+    <div class="shead"><span class="num">۰۴</span><h2>نتیجهٔ عملکرد</h2></div>
+    <p class="sub">
+      کل سبد، از ۲۰۱۷ تا ۲۰۲۶، بدون اهرم. همهٔ اعداد پس از کسر اسپرد، لغزش قیمت،
+      کمیسیون و بهرهٔ شبانهٔ CFD محاسبه شده‌اند، و هر سیگنال روی کندلِ <em>بعد</em> از
+      صدور آن اجرا شده است.
+    </p>
+  </div>
+  <div class="panel">
+    <div class="figtitle">منحنی سرمایه</div>
+    <div class="figsub">رشد یک واحد سرمایه · بدون اهرم · اردیبهشت ۱۳۹۶ تا شهریور ۱۴۰۵</div>
+    <div class="chart" id="c-eq-fa"></div>
+  </div>
+  <div class="panel">
+    <div class="figtitle">افت سرمایه</div>
+    <div class="figsub">فاصله از بالاترین سقف سرمایه، بر حسب درصد</div>
+    <div class="chart" id="c-dd-fa"></div>
+  </div>
+  <div class="col kpis" style="margin-top:26px">
+    <div class="kpi"><div class="v">6.05<span style="font-size:1rem">%</span></div><div class="k">بازده مرکب سالانه</div><div class="s">بدون اهرم</div></div>
+    <div class="kpi"><div class="v">1.45</div><div class="k">نسبت شارپ</div><div class="s">سورتینو ۲.۱۴</div></div>
+    <div class="kpi"><div class="v">−7.7<span style="font-size:1rem">%</span></div><div class="k">حداکثر افت سرمایه</div><div class="s">کالمار ۰.۷۹</div></div>
+    <div class="kpi"><div class="v">86<span style="font-size:1rem">%</span></div><div class="k">پنجره‌های ۱۲ ماههٔ مثبت</div><div class="s">‏۸ سال از ۱۰ سال</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="col">
+    <div class="shead"><span class="num">۰۵</span><h2>انتخاب سطح ریسک</h2></div>
+    <p class="sub">
+      اهرم، بازده و افت سرمایه را با هم بزرگ می‌کند؛ نسبت شارپ را تغییر نمی‌دهد.
+      این همان معاوضهٔ واقعی است، و جایی است که هدفِ بازدهی باید با واقعیت روبه‌رو شود.
+    </p>
+  </div>
+  <div class="tblwrap">
+    <table>
+      <thead><tr>
+        <th>اهرم</th><th>ماهانه</th><th>سالانهٔ مرکب</th><th>نوسان</th>
+        <th>حداکثر افت</th><th>بدترین ماه</th>
+      </tr></thead>
+      <tbody id="t-frontier-fa"></tbody>
+    </table>
+  </div>
+  <div class="col">
+    <div class="warn">
+      <p><strong>دربارهٔ هدف ۵ درصد در ماه.</strong> این عدد معادل ۵.۱۶٪ در ماه با اهرم
+      ۱۰ برابر است، و همان تاریخچه‌ای که این بازده را می‌سازد، یک
+      <strong>افت سرمایهٔ <bdi>−۵۸</bdi> درصدی</strong> هم می‌سازد. با ریسک ۱٪ در هر معامله و یک حد
+      ضرر منطقی، این ستاپ حدود <span class="mono">0.55%</span> در ماه بازده می‌دهد.
+      رسیدن به ۵٪ مسئلهٔ پیدا کردن نقطهٔ ورود بهتر نیست — یعنی ۱۰ برابر کردن حجم پوزیشن،
+      و افت سرمایه هم دقیقاً به همان نسبت بزرگ می‌شود. شارپ ۱.۴۵ عدد خوبی است؛ فقط بدون
+      ۴۱٪ نوسان نمی‌تواند ۶۰٪ در سال بدهد.</p>
+      <p style="margin-top:.8em">اهرم ۳ برابر سطحی است که ارزش دفاع دارد:
+      <span class="mono">1.50%</span> در ماه، با بدترین حالت <span class="mono">−21.7%</span>.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="col">
+    <div class="shead"><span class="num">۰۶</span><h2>حد ضرر باید گشاد باشد</h2></div>
+    <p class="sub">
+      این غیرشهودی‌ترین قانون این ستاپ است و آسان‌ترین چیزی که می‌شود اشتباه انجامش داد.
+      لبهٔ آماری یک <strong>روندِ ۶ واحدی است که روی کندلی با انحراف معیار ۳۸ واحد سوار
+      شده</strong>. حد ضرر تنگ اینجا کنترل ریسک نیست — یک فیلترِ نویز است که در جهت
+      اشتباه نشانه رفته، و امید ریاضی مثبت را به منفی تبدیل می‌کند.
+    </p>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>فاصلهٔ حد ضرر</th><th>نرخ فعال‌شدن</th><th>بازده سالانه</th><th>بازده به افت</th></tr></thead>
+        <tbody>
+          <tr><td>‏۰.۵ × ATR</td><td class="num">35%</td><td class="num neg">−15.3%</td><td class="num neg">منفی</td></tr>
+          <tr><td>‏۱.۰ × ATR</td><td class="num">11%</td><td class="num neg">−3.3%</td><td class="num neg">منفی</td></tr>
+          <tr><td>‏۲.۰ × ATR</td><td class="num">1.1%</td><td class="num pos">+2.9%</td><td class="num">0.26</td></tr>
+          <tr class="mark"><td>‏۴.۰ × ATR</td><td class="num">0.4%</td><td class="num pos">+6.7%</td><td class="num">1.97</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:22px">
+      حد ضرر برای جان سالم به‌در بردن از یک شوک است، نه برای تعیین حجم پوزیشن. حجم را
+      هدف‌گذاری نوسان تعیین می‌کند.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="col">
+    <div class="shead"><span class="num">۰۷</span><h2>چه چیزی این ستاپ را خراب می‌کند</h2></div>
+    <p class="sub">
+      بی‌پرده می‌نویسم، چون همین‌ها تعیین می‌کنند که این ستاپ برای شما کار می‌کند یا فقط
+      در یک بک‌تست.
+    </p>
+    <h3 style="margin-bottom:6px">۱ · اسپرد بروکر شما در ساعت ۱۸:۰۰ نیویورک</h3>
+    <p>
+      مهم‌ترین وابستگی. ورود دقیقاً روی رول‌اوور روزانه می‌افتد، یعنی همان لحظه‌ای که
+      اسپرد طلا در بیشترین مقدار خود است. سبد در حدود <strong>۲ برابرِ هزینهٔ فرض‌شده</strong>
+      به نقطهٔ سربه‌سر می‌رسد.
+    </p>
+  </div>
+  <div class="panel">
+    <div class="figtitle">نسبت شارپ در برابر هزینهٔ معاملاتی</div>
+    <div class="figsub">ضریب هزینه، اعمال‌شده روی اسپرد، لغزش قیمت و کمیسیون همهٔ نمادها</div>
+    <div class="chart" id="c-cost-fa"></div>
+  </div>
+  <div class="col">
+    <p style="margin-top:26px">
+      چون هزینه <em>کسری از قیمت</em> است، اسپردِ سربه‌سر با بالا رفتن طلا بالا می‌رود:
+      <strong>‏۰.۴۸ دلار وقتی طلا ۱٬۲۰۰ دلار بود، و ۲.۴۲ دلار در قیمت امروز یعنی ۴٬۶۲۰ دلار</strong>.
+      میانگین قیمت در بک‌تست ۱٬۸۳۷ دلار بوده، پس فشار هزینه در بک‌تست حدود ۲.۵ برابر
+      سنگین‌تر از چیزی است که امروز می‌پردازید.
+    </p>
+    <div class="note">
+      <p><strong>قبل از وارد کردن پول واقعی این را انجام دهید.</strong> دو هفته، هر روز
+      اسپرد واقعی XAUUSD بروکرتان را در ساعت ۱۸:۰۰ نیویورک یادداشت کنید. زیر
+      <span class="mono">$1.00</span> ستاپ راحت کار می‌کند. بالای
+      <span class="mono">$2.50</span> قابل معامله نیست — و این واقعیتی دربارهٔ بروکر
+      شماست، نه دربارهٔ خودِ لبهٔ آماری.</p>
+    </div>
+
+    <h3 style="margin-bottom:6px">۲ · لبهٔ آماری در چند دقیقهٔ نخست است</h3>
+    <p>
+      روی دادهٔ پنج‌دقیقه‌ای، پنج دقیقهٔ اول <span class="mono">+4.0</span> واحد از
+      <span class="mono">+5.1</span> واحدِ کل آن ساعت را می‌سازد. ده دقیقه دیرتر وارد
+      شوید، بیشترش را از دست داده‌اید. این ستاپ به سفارشی نیاز دارد که <em>روی</em> لحظهٔ
+      باز شدن قرار گرفته باشد — چیزی نیست که بشود با حوصله و دستی معامله کرد.
+    </p>
+
+    <h3 style="margin-bottom:6px">۳ · بهرهٔ شبانه اختیاری نیست</h3>
+    <p>
+      پوزیشن خرید روی CFD شاخص‌ها تقریباً «نرخ مرجع + ۲.۵٪ منهای سود تقسیمی» بهره
+      می‌پردازد. با محاسبهٔ درست آن، بازده خرید و نگهداری US500 از ۶.۸٪ به
+      <span class="mono">3.6%</span> در سال و طلا از ۹.۰٪ به <span class="mono">3.5%</span>
+      می‌رسد. دقیقاً همین دورهٔ نگهداری سه‌ساعته است که باعث می‌شود این ستاپ از پس آن
+      بربیاید — و خرید و نگهداری روی CFD برنیاید.
+    </p>
+
+    <h3 style="margin-bottom:6px">۴ · خروج سه‌ساعته فقط ۳.۶ سال داده دارد</h3>
+    <p>
+      دادهٔ یک‌ساعته تنها از ۲۰۲۳ شروع می‌شود. زمان خروج در همین بازه تأیید شده
+      (شارپ ۲.۵۳) و <em>خودِ ایده</em> روی ۱۳.۶ سال دادهٔ چهارساعته (شارپ ۱.۳۴)، اما
+      انتخاب مشخصِ سه ساعت در برابر چهار ساعت از نمونهٔ کوتاه‌تر می‌آید. هر دو روی یک
+      فلات قرار دارند نه روی یک قله، پس این انتخاب تعیین‌کننده نیست.
+    </p>
+
+    <h3 style="margin-bottom:6px">۵ · بخش‌های B و C وابسته به رژیم بازارند</h3>
+    <p>
+      بازگشت به میانگین شاخص‌ها در دورهٔ درون‌نمونه‌ای ۲۰۱۷ تا ۲۰۲۲ <em>منفی</em> و در
+      ۲۰۲۳ تا ۲۰۲۶ مثبت بوده؛ سطح پارامترهایش عمدتاً نویز است (همبستگی رتبه‌ای
+      درون‌نمونه به برون‌نمونه ۰.۲۳). به همین دلیل سقفش ۷.۵٪ گذاشته شده. برای ساده‌سازی،
+      فقط بخش طلا را معامله کنید — ۹۵٪ نتیجه از همان می‌آید.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="col">
+    <div class="shead"><span class="num">۰۸</span><h2>چطور اعتبارسنجی شد</h2></div>
+    <p class="sub">
+      بک‌تستی که به آن حمله نشده باشد یک فرضیه است، نه یک نتیجه. این‌ها حمله‌هایی است
+      که از آن جان سالم به در برد.
+    </p>
+    <ul class="checks">
+      <li><span class="ck">&#10003;</span><div><strong>هیچ دوره‌ای به‌تنهایی بار را نمی‌کشد.</strong>
+        با تفکیک به بلوک‌های سه‌ساله، هر بلوک به‌تنهایی مثبت است — شارپ ۱.۹۲، ۱.۰۸، ۱.۲۳، ۰.۶۴ و ۱.۶۶.</div></li>
+      <li><span class="ck">&#10003;</span><div><strong>آزمون نگاه به آینده.</strong> اگر عمداً
+        سیگنال را جابه‌جا کنیم تا کندلِ <em>اشتباه</em> معامله شود، شارپ از
+        <span class="mono">+1.35</span> به <span class="mono">−1.27</span> سقوط می‌کند. این
+        تأیید می‌کند سود از خودِ کندل نشست می‌آید، نه از یک خطای یک‌واحدی در کد.</div></li>
+      <li><span class="ck">&#10003;</span><div><strong>هیچ فیلتری برازش نشده.</strong> روند،
+        جهت روز قبل، دامنهٔ روز قبل، رژیم نوسان و روز هفته همه آزموده شدند؛ هر کدام لبهٔ
+        آماری را در <em>هر دو</em> شاخه دست‌نخورده باقی گذاشتند. هیچ چیز با جست‌وجو انتخاب
+        نشده — ورود عمداً بدون شرط است.</div></li>
+      <li><span class="ck">&#10003;</span><div><strong>مونت‌کارلو.</strong> ۵٬۰۰۰ مسیر
+        بوت‌استرپ بلوکی با اهرم ۵ در افق سه‌ساله: میانه <bdi>+۱۱۸٪</bdi>، صدک پنجم <bdi>+۱۹٪</bdi>، میانهٔ
+        حداکثر افت <bdi>−۱۹٪</bdi>، احتمال ضرر ۱.۹٪.</div></li>
+      <li><span class="ck">&#10003;</span><div><strong>هزینه‌ها بدبینانه گرفته شده.</strong>
+        اسپرد کامل در هر معامله، لغزش قیمت اضافه روی آن، اسپرد ورود دو برابر در آزمون
+        مبتنی بر ریسک، و بهرهٔ شبانه بر اساس روزهای تقویمی واقعی از جمله آخر هفته‌های
+        سه‌برابر.</div></li>
+      <li><span class="ck">&#10003;</span><div><strong>آزمون دارونما روی سایر بازارها.</strong>
+        همین آزمون روی سه شاخص و چهار جفت‌ارز هیچ چیزی پیدا نمی‌کند (t بین <bdi>−۱.۴</bdi> تا <bdi>+۱.۱</bdi>).
+        روشی که همه‌جا اثر پیدا کند، دارد نویز پیدا می‌کند.</div></li>
+    </ul>
+  </div>
+  <div class="col" style="margin-top:30px">
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>بلوک سه‌ساله</th><th>شارپ</th><th>بازده سالانه</th><th>حداکثر افت</th></tr></thead>
+        <tbody id="t-blocks-fa"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer class="col">
+  <p>ساخته‌شده از دادهٔ قیمتی ارائه‌شده: ۸ نماد، ۵ تایم‌فریم، ۱۹۷۰ تا ۲۰۲۶. کد،
+  ۱۷ اسکریپت تحقیقاتی شماره‌گذاری‌شده پشت هر یافته، و گزارش قابل بازتولید روی برنچ
+  <span class="mono">claude/profitable-trading-setup-ftd1zh</span> قرار دارد.</p>
+  <p style="margin-bottom:0">نتایج بک‌تست تضمینی برای بازده آینده نیست. تعیین حجم بالاتر
+  از اهرم ۳ برابر افت سرمایه‌ای می‌سازد که بیشتر حساب‌ها تحملش را ندارند.</p>
+</footer>
+
+</div>
+</div>
 <script id="payload" type="application/json">{"hourly":[{"h":0,"bps":0.5,"n":937},{"h":1,"bps":-0.84,"n":939},{"h":2,"bps":1.5,"n":939},{"h":3,"bps":0.03,"n":939},{"h":4,"bps":-0.1,"n":939},{"h":5,"bps":0.19,"n":939},{"h":6,"bps":0.92,"n":939},{"h":7,"bps":0.84,"n":939},{"h":8,"bps":0.06,"n":939},{"h":9,"bps":-1.51,"n":939},{"h":10,"bps":0.37,"n":940},{"h":11,"bps":-0.13,"n":940},{"h":12,"bps":-0.04,"n":939},{"h":13,"bps":0.3,"n":939},{"h":14,"bps":0.43,"n":934},{"h":15,"bps":0.61,"n":918},{"h":16,"bps":0.07,"n":920},{"h":18,"bps":4.73,"n":933},{"h":19,"bps":0.62,"n":933},{"h":20,"bps":1.5,"n":933},{"h":21,"bps":0.22,"n":933},{"h":22,"bps":-0.38,"n":933},{"h":23,"bps":0.36,"n":933}],"session_by_year":[{"y":2013,"bps":10.86},{"y":2014,"bps":3.85},{"y":2015,"bps":5.21},{"y":2016,"bps":5.75},{"y":2017,"bps":5.55},{"y":2018,"bps":3.76},{"y":2019,"bps":5.79},{"y":2020,"bps":9.17},{"y":2021,"bps":5.05},{"y":2022,"bps":0.16},{"y":2023,"bps":5.52},{"y":2024,"bps":3.92},{"y":2025,"bps":7.8},{"y":2026,"bps":13.31}],"other_by_year":[{"y":2013,"bps":-2.84},{"y":2014,"bps":-0.3},{"y":2015,"bps":-1.55},{"y":2016,"bps":-0.39},{"y":2017,"bps":-0.13},{"y":2018,"bps":-0.83},{"y":2019,"bps":0.38},{"y":2020,"bps":-0.13},{"y":2021,"bps":-1.21},{"y":2022,"bps":0.1},{"y":2023,"bps":-0.08},{"y":2024,"bps":1.23},{"y":2025,"bps":2.32},{"y":2026,"bps":-1.85}],"gold_yearly":[{"y":2013,"r":20.33},{"y":2014,"r":3.12},{"y":2015,"r":3.42},{"y":2016,"r":7.84},{"y":2017,"r":5.4},{"y":2018,"r":-1.14},{"y":2019,"r":2.8},{"y":2020,"r":8.51},{"y":2021,"r":4.37},{"y":2022,"r":-4.15},{"y":2023,"r":8.68},{"y":2024,"r":2.8},{"y":2025,"r":13.52},{"y":2026,"r":19.41}],"book_yearly":[{"y":2017,"r":10.07},{"y":2018,"r":-3.4},{"y":2019,"r":5.7},{"y":2020,"r":9.48},{"y":2021,"r":4.89},{"y":2022,"r":-3.08},{"y":2023,"r":11.4},{"y":2024,"r":3.3},{"y":2025,"r":10.98},{"y":2026,"r":8.15}],"equity":[{"d":"2017-05-07","v":1.0082},{"d":"2017-05-14","v":1.0153},{"d":"2017-05-21","v":1.0298},{"d":"2017-05-28","v":1.0347},{"d":"2017-06-04","v":1.0327},{"d":"2017-06-11","v":1.0314},{"d":"2017-06-18","v":1.0374},{"d":"2017-06-25","v":1.0494},{"d":"2017-07-02","v":1.0546},{"d":"2017-07-09","v":1.0519},{"d":"2017-07-16","v":1.0496},{"d":"2017-07-23","v":1.0513},{"d":"2017-07-30","v":1.0513},{"d":"2017-08-06","v":1.0472},{"d":"2017-08-13","v":1.0532},{"d":"2017-08-20","v":1.0539},{"d":"2017-08-27","v":1.0482},{"d":"2017-09-03","v":1.0529},{"d":"2017-09-10","v":1.0542},{"d":"2017-09-17","v":1.0521},{"d":"2017-09-24","v":1.0555},{"d":"2017-10-01","v":1.0584},{"d":"2017-10-08","v":1.0631},{"d":"2017-10-15","v":1.0706},{"d":"2017-10-22","v":1.0643},{"d":"2017-10-29","v":1.0693},{"d":"2017-11-05","v":1.0734},{"d":"2017-11-12","v":1.0759},{"d":"2017-11-19","v":1.0817},{"d":"2017-11-26","v":1.0846},{"d":"2017-12-03","v":1.0928},{"d":"2017-12-10","v":1.0917},{"d":"2017-12-17","v":1.0968},{"d":"2017-12-24","v":1.099},{"d":"2017-12-31","v":1.1007},{"d":"2018-01-07","v":1.0827},{"d":"2018-01-14","v":1.0874},{"d":"2018-01-21","v":1.0913},{"d":"2018-01-28","v":1.0983},{"d":"2018-02-04","v":1.0782},{"d":"2018-02-11","v":1.0751},{"d":"2018-02-18","v":1.0841},{"d":"2018-02-25","v":1.0732},{"d":"2018-03-04","v":1.0656},{"d":"2018-03-11","v":1.0651},{"d":"2018-03-18","v":1.0664},{"d":"2018-03-25","v":1.0737},{"d":"2018-04-01","v":1.0738},{"d":"2018-04-08","v":1.0732},{"d":"2018-04-15","v":1.0722},{"d":"2018-04-22","v":1.0633},{"d":"2018-04-29","v":1.064},{"d":"2018-05-06","v":1.0739},{"d":"2018-05-13","v":1.0681},{"d":"2018-05-20","v":1.0694},{"d":"2018-05-27","v":1.067},{"d":"2018-06-03","v":1.0697},{"d":"2018-06-10","v":1.0716},{"d":"2018-06-17","v":1.0643},{"d":"2018-06-24","v":1.0682},{"d":"2018-07-01","v":1.0596},{"d":"2018-07-08","v":1.0563},{"d":"2018-07-15","v":1.0517},{"d":"2018-07-22","v":1.0393},{"d":"2018-07-29","v":1.0397},{"d":"2018-08-05","v":1.0431},{"d":"2018-08-12","v":1.0455},{"d":"2018-08-19","v":1.0407},{"d":"2018-08-26","v":1.0375},{"d":"2018-09-02","v":1.0377},{"d":"2018-09-09","v":1.0409},{"d":"2018-09-16","v":1.0343},{"d":"2018-09-23","v":1.0321},{"d":"2018-09-30","v":1.0364},{"d":"2018-10-07","v":1.0386},{"d":"2018-10-14","v":1.0312},{"d":"2018-10-21","v":1.0317},{"d":"2018-10-28","v":1.0362},{"d":"2018-11-04","v":1.0313},{"d":"2018-11-11","v":1.0236},{"d":"2018-11-18","v":1.0294},{"d":"2018-11-25","v":1.0266},{"d":"2018-12-02","v":1.0337},{"d":"2018-12-09","v":1.0397},{"d":"2018-12-16","v":1.046},{"d":"2018-12-23","v":1.0552},{"d":"2018-12-30","v":1.0632},{"d":"2019-01-06","v":1.0717},{"d":"2019-01-13","v":1.0749},{"d":"2019-01-20","v":1.0772},{"d":"2019-01-27","v":1.0755},{"d":"2019-02-03","v":1.0729},{"d":"2019-02-10","v":1.0728},{"d":"2019-02-17","v":1.0813},{"d":"2019-02-24","v":1.0921},{"d":"2019-03-03","v":1.0952},{"d":"2019-03-10","v":1.0978},{"d":"2019-03-17","v":1.0999},{"d":"2019-03-24","v":1.1115},{"d":"2019-03-31","v":1.1146},{"d":"2019-04-07","v":1.121},{"d":"2019-04-14","v":1.1201},{"d":"2019-04-21","v":1.1149},{"d":"2019-04-28","v":1.1143},{"d":"2019-05-05","v":1.1079},{"d":"2019-05-12","v":1.1147},{"d":"2019-05-19","v":1.1114},{"d":"2019-05-26","v":1.108},{"d":"2019-06-02","v":1.1024},{"d":"2019-06-09","v":1.1021},{"d":"2019-06-16","v":1.1086},{"d":"2019-06-23","v":1.1358},{"d":"2019-06-30","v":1.1416},{"d":"2019-07-07","v":1.155},{"d":"2019-07-14","v":1.1541},{"d":"2019-07-21","v":1.1484},{"d":"2019-07-28","v":1.1467},{"d":"2019-08-04","v":1.1292},{"d":"2019-08-11","v":1.1311},{"d":"2019-08-18","v":1.132},{"d":"2019-08-25","v":1.1297},{"d":"2019-09-01","v":1.1298},{"d":"2019-09-08","v":1.1149},{"d":"2019-09-15","v":1.1074},{"d":"2019-09-22","v":1.1105},{"d":"2019-09-29","v":1.1117},{"d":"2019-10-06","v":1.1091},{"d":"2019-10-13","v":1.1102},{"d":"2019-10-20","v":1.1115},{"d":"2019-10-27","v":1.1117},{"d":"2019-11-03","v":1.1139},{"d":"2019-11-10","v":1.1119},{"d":"2019-11-17","v":1.1089},{"d":"2019-11-24","v":1.1088},{"d":"2019-12-01","v":1.1084},{"d":"2019-12-08","v":1.1063},{"d":"2019-12-15","v":1.1063},{"d":"2019-12-22","v":1.1062},{"d":"2019-12-29","v":1.1158},{"d":"2020-01-05","v":1.1373},{"d":"2020-01-12","v":1.1466},{"d":"2020-01-19","v":1.1488},{"d":"2020-01-26","v":1.1435},{"d":"2020-02-02","v":1.1396},{"d":"2020-02-09","v":1.1479},{"d":"2020-02-16","v":1.1513},{"d":"2020-02-23","v":1.1562},{"d":"2020-03-01","v":1.154},{"d":"2020-03-08","v":1.1638},{"d":"2020-03-15","v":1.1567},{"d":"2020-03-22","v":1.1554},{"d":"2020-03-29","v":1.1534},{"d":"2020-04-05","v":1.1512},{"d":"2020-04-12","v":1.1564},{"d":"2020-04-19","v":1.1585},{"d":"2020-04-26","v":1.1526},{"d":"2020-05-03","v":1.1477},{"d":"2020-05-10","v":1.1522},{"d":"2020-05-17","v":1.1547},{"d":"2020-05-24","v":1.1602},{"d":"2020-05-31","v":1.1696},{"d":"2020-06-07","v":1.1735},{"d":"2020-06-14","v":1.1689},{"d":"2020-06-21","v":1.1712},{"d":"2020-06-28","v":1.1711},{"d":"2020-07-05","v":1.1726},{"d":"2020-07-12","v":1.1744},{"d":"2020-07-19","v":1.1737},{"d":"2020-07-26","v":1.1839},{"d":"2020-08-02","v":1.206},{"d":"2020-08-09","v":1.2093},{"d":"2020-08-16","v":1.2065},{"d":"2020-08-23","v":1.212},{"d":"2020-08-30","v":1.2145},{"d":"2020-09-06","v":1.2189},{"d":"2020-09-13","v":1.2153},{"d":"2020-09-20","v":1.219},{"d":"2020-09-27","v":1.2173},{"d":"2020-10-04","v":1.215},{"d":"2020-10-11","v":1.2233},{"d":"2020-10-18","v":1.2157},{"d":"2020-10-25","v":1.2118},{"d":"2020-11-01","v":1.2138},{"d":"2020-11-08","v":1.2074},{"d":"2020-11-15","v":1.2157},{"d":"2020-11-22","v":1.2148},{"d":"2020-11-29","v":1.2108},{"d":"2020-12-06","v":1.2122},{"d":"2020-12-13","v":1.2149},{"d":"2020-12-20","v":1.2166},{"d":"2020-12-27","v":1.2259},{"d":"2021-01-03","v":1.2304},{"d":"2021-01-10","v":1.226},{"d":"2021-01-17","v":1.2301},{"d":"2021-01-24","v":1.231},{"d":"2021-01-31","v":1.223},{"d":"2021-02-07","v":1.2212},{"d":"2021-02-14","v":1.2228},{"d":"2021-02-21","v":1.2245},{"d":"2021-02-28","v":1.225},{"d":"2021-03-07","v":1.2134},{"d":"2021-03-14","v":1.2141},{"d":"2021-03-21","v":1.2158},{"d":"2021-03-28","v":1.2154},{"d":"2021-04-04","v":1.2147},{"d":"2021-04-11","v":1.217},{"d":"2021-04-18","v":1.2151},{"d":"2021-04-25","v":1.2217},{"d":"2021-05-02","v":1.2142},{"d":"2021-05-09","v":1.2122},{"d":"2021-05-16","v":1.207},{"d":"2021-05-23","v":1.2058},{"d":"2021-05-30","v":1.2005},{"d":"2021-06-06","v":1.1942},{"d":"2021-06-13","v":1.1948},{"d":"2021-06-20","v":1.1984},{"d":"2021-06-27","v":1.2006},{"d":"2021-07-04","v":1.2034},{"d":"2021-07-11","v":1.209},{"d":"2021-07-18","v":1.2117},{"d":"2021-07-25","v":1.2098},{"d":"2021-08-01","v":1.221},{"d":"2021-08-08","v":1.2192},{"d":"2021-08-15","v":1.2244},{"d":"2021-08-22","v":1.2231},{"d":"2021-08-29","v":1.2189},{"d":"2021-09-05","v":1.2252},{"d":"2021-09-12","v":1.2307},{"d":"2021-09-19","v":1.2312},{"d":"2021-09-26","v":1.2354},{"d":"2021-10-03","v":1.2393},{"d":"2021-10-10","v":1.2351},{"d":"2021-10-17","v":1.2358},{"d":"2021-10-24","v":1.2479},{"d":"2021-10-31","v":1.2461},{"d":"2021-11-07","v":1.2504},{"d":"2021-11-14","v":1.2408},{"d":"2021-11-21","v":1.2483},{"d":"2021-11-28","v":1.2573},{"d":"2021-12-05","v":1.2629},{"d":"2021-12-12","v":1.273},{"d":"2021-12-19","v":1.2833},{"d":"2021-12-26","v":1.2914},{"d":"2022-01-02","v":1.2906},{"d":"2022-01-09","v":1.2922},{"d":"2022-01-16","v":1.2947},{"d":"2022-01-23","v":1.2967},{"d":"2022-01-30","v":1.2941},{"d":"2022-02-06","v":1.2956},{"d":"2022-02-13","v":1.2995},{"d":"2022-02-20","v":1.2972},{"d":"2022-02-27","v":1.3118},{"d":"2022-03-06","v":1.3073},{"d":"2022-03-13","v":1.2996},{"d":"2022-03-20","v":1.2973},{"d":"2022-03-27","v":1.2961},{"d":"2022-04-03","v":1.2952},{"d":"2022-04-10","v":1.2881},{"d":"2022-04-17","v":1.2913},{"d":"2022-04-24","v":1.2809},{"d":"2022-05-01","v":1.2819},{"d":"2022-05-08","v":1.2844},{"d":"2022-05-15","v":1.2877},{"d":"2022-05-22","v":1.2836},{"d":"2022-05-29","v":1.2795},{"d":"2022-06-05","v":1.274},{"d":"2022-06-12","v":1.2647},{"d":"2022-06-19","v":1.2631},{"d":"2022-06-26","v":1.2599},{"d":"2022-07-03","v":1.2594},{"d":"2022-07-10","v":1.266},{"d":"2022-07-17","v":1.2631},{"d":"2022-07-24","v":1.2543},{"d":"2022-07-31","v":1.2617},{"d":"2022-08-07","v":1.2701},{"d":"2022-08-14","v":1.2601},{"d":"2022-08-21","v":1.2563},{"d":"2022-08-28","v":1.2533},{"d":"2022-09-04","v":1.2433},{"d":"2022-09-11","v":1.2491},{"d":"2022-09-18","v":1.2449},{"d":"2022-09-25","v":1.2341},{"d":"2022-10-02","v":1.2317},{"d":"2022-10-09","v":1.23},{"d":"2022-10-16","v":1.2274},{"d":"2022-10-23","v":1.2243},{"d":"2022-10-30","v":1.2288},{"d":"2022-11-06","v":1.2362},{"d":"2022-11-13","v":1.2319},{"d":"2022-11-20","v":1.2283},{"d":"2022-11-27","v":1.2371},{"d":"2022-12-04","v":1.2471},{"d":"2022-12-11","v":1.247},{"d":"2022-12-18","v":1.2429},{"d":"2022-12-25","v":1.2436},{"d":"2023-01-01","v":1.2508},{"d":"2023-01-08","v":1.2735},{"d":"2023-01-15","v":1.2783},{"d":"2023-01-22","v":1.2717},{"d":"2023-01-29","v":1.2708},{"d":"2023-02-05","v":1.2747},{"d":"2023-02-12","v":1.2809},{"d":"2023-02-19","v":1.2792},{"d":"2023-02-26","v":1.2822},{"d":"2023-03-05","v":1.2844},{"d":"2023-03-12","v":1.2806},{"d":"2023-03-19","v":1.2722},{"d":"2023-03-26","v":1.2726},{"d":"2023-04-02","v":1.2732},{"d":"2023-04-09","v":1.2649},{"d":"2023-04-16","v":1.2777},{"d":"2023-04-23","v":1.2779},{"d":"2023-04-30","v":1.2876},{"d":"2023-05-07","v":1.2882},{"d":"2023-05-14","v":1.2885},{"d":"2023-05-21","v":1.2916},{"d":"2023-05-28","v":1.2854},{"d":"2023-06-04","v":1.2839},{"d":"2023-06-11","v":1.2858},{"d":"2023-06-18","v":1.2825},{"d":"2023-06-25","v":1.2765},{"d":"2023-07-02","v":1.2845},{"d":"2023-07-09","v":1.2834},{"d":"2023-07-16","v":1.2919},{"d":"2023-07-23","v":1.3009},{"d":"2023-07-30","v":1.318},{"d":"2023-08-06","v":1.3151},{"d":"2023-08-13","v":1.3184},{"d":"2023-08-20","v":1.3216},{"d":"2023-08-27","v":1.3274},{"d":"2023-09-03","v":1.3352},{"d":"2023-09-10","v":1.3379},{"d":"2023-09-17","v":1.3403},{"d":"2023-09-24","v":1.3348},{"d":"2023-10-01","v":1.3343},{"d":"2023-10-08","v":1.3345},{"d":"2023-10-15","v":1.3403},{"d":"2023-10-22","v":1.3495},{"d":"2023-10-29","v":1.3565},{"d":"2023-11-05","v":1.3592},{"d":"2023-11-12","v":1.3533},{"d":"2023-11-19","v":1.3567},{"d":"2023-11-26","v":1.3656},{"d":"2023-12-03","v":1.3757},{"d":"2023-12-10","v":1.3826},{"d":"2023-12-17","v":1.3847},{"d":"2023-12-24","v":1.3888},{"d":"2023-12-31","v":1.3934},{"d":"2024-01-07","v":1.3972},{"d":"2024-01-14","v":1.4118},{"d":"2024-01-21","v":1.4094},{"d":"2024-01-28","v":1.4071},{"d":"2024-02-04","v":1.411},{"d":"2024-02-11","v":1.4096},{"d":"2024-02-18","v":1.4065},{"d":"2024-02-25","v":1.4093},{"d":"2024-03-03","v":1.4148},{"d":"2024-03-10","v":1.4091},{"d":"2024-03-17","v":1.4095},{"d":"2024-03-24","v":1.4231},{"d":"2024-03-31","v":1.418},{"d":"2024-04-07","v":1.4039},{"d":"2024-04-14","v":1.4155},{"d":"2024-04-21","v":1.4307},{"d":"2024-04-28","v":1.4201},{"d":"2024-05-05","v":1.4225},{"d":"2024-05-12","v":1.4227},{"d":"2024-05-19","v":1.4295},{"d":"2024-05-26","v":1.4259},{"d":"2024-06-02","v":1.4229},{"d":"2024-06-09","v":1.4291},{"d":"2024-06-16","v":1.4195},{"d":"2024-06-23","v":1.4261},{"d":"2024-06-30","v":1.4106},{"d":"2024-07-07","v":1.4178},{"d":"2024-07-14","v":1.422},{"d":"2024-07-21","v":1.4213},{"d":"2024-07-28","v":1.4159},{"d":"2024-08-04","v":1.409},{"d":"2024-08-11","v":1.4054},{"d":"2024-08-18","v":1.404},{"d":"2024-08-25","v":1.4041},{"d":"2024-09-01","v":1.3981},{"d":"2024-09-08","v":1.3823},{"d":"2024-09-15","v":1.385},{"d":"2024-09-22","v":1.3844},{"d":"2024-09-29","v":1.3863},{"d":"2024-10-06","v":1.3885},{"d":"2024-10-13","v":1.395},{"d":"2024-10-20","v":1.4093},{"d":"2024-10-27","v":1.4064},{"d":"2024-11-03","v":1.4133},{"d":"2024-11-10","v":1.4052},{"d":"2024-11-17","v":1.406},{"d":"2024-11-24","v":1.4217},{"d":"2024-12-01","v":1.4287},{"d":"2024-12-08","v":1.4238},{"d":"2024-12-15","v":1.4265},{"d":"2024-12-22","v":1.442},{"d":"2024-12-29","v":1.4413},{"d":"2025-01-05","v":1.4422},{"d":"2025-01-12","v":1.4417},{"d":"2025-01-19","v":1.4444},{"d":"2025-01-26","v":1.4702},{"d":"2025-02-02","v":1.4671},{"d":"2025-02-09","v":1.4839},{"d":"2025-02-16","v":1.4894},{"d":"2025-02-23","v":1.4905},{"d":"2025-03-02","v":1.4819},{"d":"2025-03-09","v":1.4689},{"d":"2025-03-16","v":1.4696},{"d":"2025-03-23","v":1.4642},{"d":"2025-03-30","v":1.4763},{"d":"2025-04-06","v":1.4887},{"d":"2025-04-13","v":1.5151},{"d":"2025-04-20","v":1.5237},{"d":"2025-04-27","v":1.5462},{"d":"2025-05-04","v":1.5327},{"d":"2025-05-11","v":1.5359},{"d":"2025-05-18","v":1.5272},{"d":"2025-05-25","v":1.5329},{"d":"2025-06-01","v":1.522},{"d":"2025-06-08","v":1.5301},{"d":"2025-06-15","v":1.5457},{"d":"2025-06-22","v":1.5414},{"d":"2025-06-29","v":1.5318},{"d":"2025-07-06","v":1.5338},{"d":"2025-07-13","v":1.5403},{"d":"2025-07-20","v":1.5442},{"d":"2025-07-27","v":1.5348},{"d":"2025-08-03","v":1.532},{"d":"2025-08-10","v":1.5359},{"d":"2025-08-17","v":1.5468},{"d":"2025-08-24","v":1.5382},{"d":"2025-08-31","v":1.5283},{"d":"2025-09-07","v":1.5394},{"d":"2025-09-14","v":1.551},{"d":"2025-09-21","v":1.5443},{"d":"2025-09-28","v":1.5419},{"d":"2025-10-05","v":1.5542},{"d":"2025-10-12","v":1.5516},{"d":"2025-10-19","v":1.573},{"d":"2025-10-26","v":1.5602},{"d":"2025-11-02","v":1.5706},{"d":"2025-11-09","v":1.5725},{"d":"2025-11-16","v":1.5829},{"d":"2025-11-23","v":1.5702},{"d":"2025-11-30","v":1.5846},{"d":"2025-12-07","v":1.5871},{"d":"2025-12-14","v":1.5854},{"d":"2025-12-21","v":1.5785},{"d":"2025-12-28","v":1.591},{"d":"2026-01-04","v":1.5985},{"d":"2026-01-11","v":1.5925},{"d":"2026-01-18","v":1.5883},{"d":"2026-01-25","v":1.5975},{"d":"2026-02-01","v":1.6183},{"d":"2026-02-08","v":1.6247},{"d":"2026-02-15","v":1.6295},{"d":"2026-02-22","v":1.6284},{"d":"2026-03-01","v":1.6293},{"d":"2026-03-08","v":1.6566},{"d":"2026-03-15","v":1.6682},{"d":"2026-03-22","v":1.6788},{"d":"2026-03-29","v":1.6853},{"d":"2026-04-05","v":1.6948},{"d":"2026-04-12","v":1.7074},{"d":"2026-04-19","v":1.7173},{"d":"2026-04-26","v":1.7201},{"d":"2026-05-03","v":1.7251},{"d":"2026-05-10","v":1.7638},{"d":"2026-05-17","v":1.75},{"d":"2026-05-24","v":1.7497},{"d":"2026-05-31","v":1.7321},{"d":"2026-06-07","v":1.724},{"d":"2026-06-14","v":1.7124},{"d":"2026-06-21","v":1.7206},{"d":"2026-06-28","v":1.7101},{"d":"2026-07-05","v":1.7113},{"d":"2026-07-12","v":1.7058},{"d":"2026-07-19","v":1.7017},{"d":"2026-07-26","v":1.7118},{"d":"2026-08-02","v":1.7024},{"d":"2026-08-09","v":1.7247},{"d":"2026-08-16","v":1.7323},{"d":"2026-08-23","v":1.7276}],"drawdown":[{"d":"2017-05-07","v":0.0},{"d":"2017-05-14","v":0.0},{"d":"2017-05-21","v":0.0},{"d":"2017-05-28","v":0.0},{"d":"2017-06-04","v":-0.44},{"d":"2017-06-11","v":-0.56},{"d":"2017-06-18","v":-0.14},{"d":"2017-06-25","v":0.0},{"d":"2017-07-02","v":-0.04},{"d":"2017-07-09","v":-0.83},{"d":"2017-07-16","v":-1.05},{"d":"2017-07-23","v":-0.89},{"d":"2017-07-30","v":-0.89},{"d":"2017-08-06","v":-1.27},{"d":"2017-08-13","v":-0.71},{"d":"2017-08-20","v":-0.65},{"d":"2017-08-27","v":-1.19},{"d":"2017-09-03","v":-0.74},{"d":"2017-09-10","v":-0.61},{"d":"2017-09-17","v":-0.81},{"d":"2017-09-24","v":-0.49},{"d":"2017-10-01","v":-0.22},{"d":"2017-10-08","v":0.0},{"d":"2017-10-15","v":0.0},{"d":"2017-10-22","v":-0.6},{"d":"2017-10-29","v":-0.13},{"d":"2017-11-05","v":0.0},{"d":"2017-11-12","v":0.0},{"d":"2017-11-19","v":0.0},{"d":"2017-11-26","v":-0.11},{"d":"2017-12-03","v":0.0},{"d":"2017-12-10","v":-0.1},{"d":"2017-12-17","v":0.0},{"d":"2017-12-24","v":-0.16},{"d":"2017-12-31","v":-0.01},{"d":"2018-01-07","v":-2.32},{"d":"2018-01-14","v":-1.9},{"d":"2018-01-21","v":-1.55},{"d":"2018-01-28","v":-0.91},{"d":"2018-02-04","v":-2.72},{"d":"2018-02-11","v":-3.01},{"d":"2018-02-18","v":-2.19},{"d":"2018-02-25","v":-3.18},{"d":"2018-03-04","v":-3.86},{"d":"2018-03-11","v":-3.91},{"d":"2018-03-18","v":-3.79},{"d":"2018-03-25","v":-3.14},{"d":"2018-04-01","v":-3.12},{"d":"2018-04-08","v":-3.18},{"d":"2018-04-15","v":-3.27},{"d":"2018-04-22","v":-4.08},{"d":"2018-04-29","v":-4.01},{"d":"2018-05-06","v":-3.12},{"d":"2018-05-13","v":-3.64},{"d":"2018-05-20","v":-3.53},{"d":"2018-05-27","v":-3.74},{"d":"2018-06-03","v":-3.49},{"d":"2018-06-10","v":-3.32},{"d":"2018-06-17","v":-3.98},{"d":"2018-06-24","v":-3.63},{"d":"2018-07-01","v":-4.41},{"d":"2018-07-08","v":-4.7},{"d":"2018-07-15","v":-5.12},{"d":"2018-07-22","v":-6.24},{"d":"2018-07-29","v":-6.2},{"d":"2018-08-05","v":-5.89},{"d":"2018-08-12","v":-5.68},{"d":"2018-08-19","v":-6.11},{"d":"2018-08-26","v":-6.4},{"d":"2018-09-02","v":-6.38},{"d":"2018-09-09","v":-6.09},{"d":"2018-09-16","v":-6.69},{"d":"2018-09-23","v":-6.89},{"d":"2018-09-30","v":-6.5},{"d":"2018-10-07","v":-6.3},{"d":"2018-10-14","v":-6.97},{"d":"2018-10-21","v":-6.93},{"d":"2018-10-28","v":-6.52},{"d":"2018-11-04","v":-6.96},{"d":"2018-11-11","v":-7.65},{"d":"2018-11-18","v":-7.13},{"d":"2018-11-25","v":-7.38},{"d":"2018-12-02","v":-6.74},{"d":"2018-12-09","v":-6.2},{"d":"2018-12-16","v":-5.63},{"d":"2018-12-23","v":-4.8},{"d":"2018-12-30","v":-4.08},{"d":"2019-01-06","v":-3.31},{"d":"2019-01-13","v":-3.03},{"d":"2019-01-20","v":-2.82},{"d":"2019-01-27","v":-2.98},{"d":"2019-02-03","v":-3.2},{"d":"2019-02-10","v":-3.21},{"d":"2019-02-17","v":-2.44},{"d":"2019-02-24","v":-1.47},{"d":"2019-03-03","v":-1.2},{"d":"2019-03-10","v":-0.96},{"d":"2019-03-17","v":-0.77},{"d":"2019-03-24","v":0.0},{"d":"2019-03-31","v":0.0},{"d":"2019-04-07","v":-0.03},{"d":"2019-04-14","v":-0.22},{"d":"2019-04-21","v":-0.68},{"d":"2019-04-28","v":-0.73},{"d":"2019-05-05","v":-1.31},{"d":"2019-05-12","v":-0.7},{"d":"2019-05-19","v":-1.0},{"d":"2019-05-26","v":-1.29},{"d":"2019-06-02","v":-1.8},{"d":"2019-06-09","v":-1.82},{"d":"2019-06-16","v":-1.24},{"d":"2019-06-23","v":0.0},{"d":"2019-06-30","v":0.0},{"d":"2019-07-07","v":0.0},{"d":"2019-07-14","v":-0.08},{"d":"2019-07-21","v":-0.57},{"d":"2019-07-28","v":-0.72},{"d":"2019-08-04","v":-2.24},{"d":"2019-08-11","v":-2.07},{"d":"2019-08-18","v":-1.99},{"d":"2019-08-25","v":-2.19},{"d":"2019-09-01","v":-2.18},{"d":"2019-09-08","v":-3.47},{"d":"2019-09-15","v":-4.12},{"d":"2019-09-22","v":-3.85},{"d":"2019-09-29","v":-3.75},{"d":"2019-10-06","v":-3.98},{"d":"2019-10-13","v":-3.87},{"d":"2019-10-20","v":-3.76},{"d":"2019-10-27","v":-3.75},{"d":"2019-11-03","v":-3.55},{"d":"2019-11-10","v":-3.73},{"d":"2019-11-17","v":-3.99},{"d":"2019-11-24","v":-4.0},{"d":"2019-12-01","v":-4.03},{"d":"2019-12-08","v":-4.21},{"d":"2019-12-15","v":-4.21},{"d":"2019-12-22","v":-4.23},{"d":"2019-12-29","v":-3.4},{"d":"2020-01-05","v":-1.53},{"d":"2020-01-12","v":-0.73},{"d":"2020-01-19","v":-0.54},{"d":"2020-01-26","v":-1.0},{"d":"2020-02-02","v":-1.33},{"d":"2020-02-09","v":-0.62},{"d":"2020-02-16","v":-0.32},{"d":"2020-02-23","v":-0.13},{"d":"2020-03-01","v":-0.32},{"d":"2020-03-08","v":-0.08},{"d":"2020-03-15","v":-0.7},{"d":"2020-03-22","v":-0.81},{"d":"2020-03-29","v":-0.98},{"d":"2020-04-05","v":-1.16},{"d":"2020-04-12","v":-0.72},{"d":"2020-04-19","v":-0.54},{"d":"2020-04-26","v":-1.05},{"d":"2020-05-03","v":-1.47},{"d":"2020-05-10","v":-1.08},{"d":"2020-05-17","v":-0.87},{"d":"2020-05-24","v":-0.4},{"d":"2020-05-31","v":0.0},{"d":"2020-06-07","v":-0.07},{"d":"2020-06-14","v":-0.61},{"d":"2020-06-21","v":-0.41},{"d":"2020-06-28","v":-0.42},{"d":"2020-07-05","v":-0.3},{"d":"2020-07-12","v":-0.15},{"d":"2020-07-19","v":-0.21},{"d":"2020-07-26","v":-0.5},{"d":"2020-08-02","v":0.0},{"d":"2020-08-09","v":0.0},{"d":"2020-08-16","v":-0.23},{"d":"2020-08-23","v":0.0},{"d":"2020-08-30","v":-0.05},{"d":"2020-09-06","v":-0.04},{"d":"2020-09-13","v":-0.33},{"d":"2020-09-20","v":-0.04},{"d":"2020-09-27","v":-0.23},{"d":"2020-10-04","v":-0.43},{"d":"2020-10-11","v":0.0},{"d":"2020-10-18","v":-0.62},{"d":"2020-10-25","v":-0.94},{"d":"2020-11-01","v":-0.78},{"d":"2020-11-08","v":-1.3},{"d":"2020-11-15","v":-0.62},{"d":"2020-11-22","v":-0.69},{"d":"2020-11-29","v":-1.03},{"d":"2020-12-06","v":-0.91},{"d":"2020-12-13","v":-0.69},{"d":"2020-12-20","v":-0.55},{"d":"2020-12-27","v":0.0},{"d":"2021-01-03","v":-0.06},{"d":"2021-01-10","v":-0.42},{"d":"2021-01-17","v":-0.08},{"d":"2021-01-24","v":-0.37},{"d":"2021-01-31","v":-1.01},{"d":"2021-02-07","v":-1.16},{"d":"2021-02-14","v":-1.03},{"d":"2021-02-21","v":-0.89},{"d":"2021-02-28","v":-0.85},{"d":"2021-03-07","v":-1.79},{"d":"2021-03-14","v":-1.74},{"d":"2021-03-21","v":-1.6},{"d":"2021-03-28","v":-1.63},{"d":"2021-04-04","v":-1.69},{"d":"2021-04-11","v":-1.5},{"d":"2021-04-18","v":-1.66},{"d":"2021-04-25","v":-1.12},{"d":"2021-05-02","v":-1.73},{"d":"2021-05-09","v":-1.89},{"d":"2021-05-16","v":-2.31},{"d":"2021-05-23","v":-2.41},{"d":"2021-05-30","v":-2.84},{"d":"2021-06-06","v":-3.35},{"d":"2021-06-13","v":-3.3},{"d":"2021-06-20","v":-3.01},{"d":"2021-06-27","v":-2.83},{"d":"2021-07-04","v":-2.6},{"d":"2021-07-11","v":-2.15},{"d":"2021-07-18","v":-1.93},{"d":"2021-07-25","v":-2.08},{"d":"2021-08-01","v":-1.17},{"d":"2021-08-08","v":-1.32},{"d":"2021-08-15","v":-0.9},{"d":"2021-08-22","v":-1.01},{"d":"2021-08-29","v":-1.35},{"d":"2021-09-05","v":-0.84},{"d":"2021-09-12","v":-0.39},{"d":"2021-09-19","v":-0.35},{"d":"2021-09-26","v":-0.01},{"d":"2021-10-03","v":0.0},{"d":"2021-10-10","v":-0.34},{"d":"2021-10-17","v":-0.29},{"d":"2021-10-24","v":0.0},{"d":"2021-10-31","v":-0.17},{"d":"2021-11-07","v":0.0},{"d":"2021-11-14","v":-0.78},{"d":"2021-11-21","v":-0.18},{"d":"2021-11-28","v":-0.01},{"d":"2021-12-05","v":0.0},{"d":"2021-12-12","v":0.0},{"d":"2021-12-19","v":0.0},{"d":"2021-12-26","v":0.0},{"d":"2022-01-02","v":-0.06},{"d":"2022-01-09","v":-0.17},{"d":"2022-01-16","v":-0.02},{"d":"2022-01-23","v":-0.02},{"d":"2022-01-30","v":-0.22},{"d":"2022-02-06","v":-0.13},{"d":"2022-02-13","v":0.0},{"d":"2022-02-20","v":-0.47},{"d":"2022-02-27","v":0.0},{"d":"2022-03-06","v":-0.47},{"d":"2022-03-13","v":-1.06},{"d":"2022-03-20","v":-1.23},{"d":"2022-03-27","v":-1.32},{"d":"2022-04-03","v":-1.39},{"d":"2022-04-10","v":-1.93},{"d":"2022-04-17","v":-1.68},{"d":"2022-04-24","v":-2.48},{"d":"2022-05-01","v":-2.4},{"d":"2022-05-08","v":-2.21},{"d":"2022-05-15","v":-1.96},{"d":"2022-05-22","v":-2.27},{"d":"2022-05-29","v":-2.58},{"d":"2022-06-05","v":-3.0},{"d":"2022-06-12","v":-3.71},{"d":"2022-06-19","v":-3.83},{"d":"2022-06-26","v":-4.08},{"d":"2022-07-03","v":-4.11},{"d":"2022-07-10","v":-3.61},{"d":"2022-07-17","v":-3.84},{"d":"2022-07-24","v":-4.5},{"d":"2022-07-31","v":-3.94},{"d":"2022-08-07","v":-3.3},{"d":"2022-08-14","v":-4.06},{"d":"2022-08-21","v":-4.35},{"d":"2022-08-28","v":-4.58},{"d":"2022-09-04","v":-5.34},{"d":"2022-09-11","v":-4.9},{"d":"2022-09-18","v":-5.22},{"d":"2022-09-25","v":-6.04},{"d":"2022-10-02","v":-6.22},{"d":"2022-10-09","v":-6.36},{"d":"2022-10-16","v":-6.55},{"d":"2022-10-23","v":-6.79},{"d":"2022-10-30","v":-6.44},{"d":"2022-11-06","v":-5.88},{"d":"2022-11-13","v":-6.21},{"d":"2022-11-20","v":-6.48},{"d":"2022-11-27","v":-5.81},{"d":"2022-12-04","v":-5.05},{"d":"2022-12-11","v":-5.06},{"d":"2022-12-18","v":-5.37},{"d":"2022-12-25","v":-5.31},{"d":"2023-01-01","v":-4.77},{"d":"2023-01-08","v":-3.04},{"d":"2023-01-15","v":-2.68},{"d":"2023-01-22","v":-3.18},{"d":"2023-01-29","v":-3.25},{"d":"2023-02-05","v":-2.95},{"d":"2023-02-12","v":-2.48},{"d":"2023-02-19","v":-2.6},{"d":"2023-02-26","v":-2.38},{"d":"2023-03-05","v":-2.21},{"d":"2023-03-12","v":-2.5},{"d":"2023-03-19","v":-3.14},{"d":"2023-03-26","v":-3.11},{"d":"2023-04-02","v":-3.06},{"d":"2023-04-09","v":-3.7},{"d":"2023-04-16","v":-2.72},{"d":"2023-04-23","v":-2.71},{"d":"2023-04-30","v":-1.97},{"d":"2023-05-07","v":-1.92},{"d":"2023-05-14","v":-1.9},{"d":"2023-05-21","v":-1.66},{"d":"2023-05-28","v":-2.14},{"d":"2023-06-04","v":-2.25},{"d":"2023-06-11","v":-2.1},{"d":"2023-06-18","v":-2.35},{"d":"2023-06-25","v":-2.82},{"d":"2023-07-02","v":-2.2},{"d":"2023-07-09","v":-2.28},{"d":"2023-07-16","v":-1.64},{"d":"2023-07-23","v":-0.96},{"d":"2023-07-30","v":0.0},{"d":"2023-08-06","v":-0.24},{"d":"2023-08-13","v":0.0},{"d":"2023-08-20","v":0.0},{"d":"2023-08-27","v":-0.03},{"d":"2023-09-03","v":0.0},{"d":"2023-09-10","v":0.0},{"d":"2023-09-17","v":0.0},{"d":"2023-09-24","v":-0.42},{"d":"2023-10-01","v":-0.46},{"d":"2023-10-08","v":-0.44},{"d":"2023-10-15","v":-0.01},{"d":"2023-10-22","v":0.0},{"d":"2023-10-29","v":-0.06},{"d":"2023-11-05","v":-0.05},{"d":"2023-11-12","v":-0.48},{"d":"2023-11-19","v":-0.23},{"d":"2023-11-26","v":-0.07},{"d":"2023-12-03","v":0.0},{"d":"2023-12-10","v":0.0},{"d":"2023-12-17","v":-0.02},{"d":"2023-12-24","v":0.0},{"d":"2023-12-31","v":0.0},{"d":"2024-01-07","v":0.0},{"d":"2024-01-14","v":0.0},{"d":"2024-01-21","v":-0.17},{"d":"2024-01-28","v":-0.33},{"d":"2024-02-04","v":-0.06},{"d":"2024-02-11","v":-0.15},{"d":"2024-02-18","v":-0.37},{"d":"2024-02-25","v":-0.18},{"d":"2024-03-03","v":0.0},{"d":"2024-03-10","v":-0.41},{"d":"2024-03-17","v":-0.38},{"d":"2024-03-24","v":-0.44},{"d":"2024-03-31","v":-0.8},{"d":"2024-04-07","v":-1.79},{"d":"2024-04-14","v":-0.97},{"d":"2024-04-21","v":0.0},{"d":"2024-04-28","v":-0.74},{"d":"2024-05-05","v":-0.57},{"d":"2024-05-12","v":-0.56},{"d":"2024-05-19","v":-0.08},{"d":"2024-05-26","v":-0.33},{"d":"2024-06-02","v":-0.54},{"d":"2024-06-09","v":-0.19},{"d":"2024-06-16","v":-0.86},{"d":"2024-06-23","v":-0.4},{"d":"2024-06-30","v":-1.48},{"d":"2024-07-07","v":-0.97},{"d":"2024-07-14","v":-0.68},{"d":"2024-07-21","v":-0.76},{"d":"2024-07-28","v":-1.14},{"d":"2024-08-04","v":-1.62},{"d":"2024-08-11","v":-1.87},{"d":"2024-08-18","v":-1.97},{"d":"2024-08-25","v":-1.96},{"d":"2024-09-01","v":-2.38},{"d":"2024-09-08","v":-3.49},{"d":"2024-09-15","v":-3.3},{"d":"2024-09-22","v":-3.34},{"d":"2024-09-29","v":-3.21},{"d":"2024-10-06","v":-3.06},{"d":"2024-10-13","v":-2.6},{"d":"2024-10-20","v":-1.6},{"d":"2024-10-27","v":-1.81},{"d":"2024-11-03","v":-1.32},{"d":"2024-11-10","v":-1.88},{"d":"2024-11-17","v":-1.83},{"d":"2024-11-24","v":-0.73},{"d":"2024-12-01","v":-0.25},{"d":"2024-12-08","v":-0.59},{"d":"2024-12-15","v":-0.4},{"d":"2024-12-22","v":0.0},{"d":"2024-12-29","v":-0.15},{"d":"2025-01-05","v":-0.09},{"d":"2025-01-12","v":-0.12},{"d":"2025-01-19","v":-0.19},{"d":"2025-01-26","v":0.0},{"d":"2025-02-02","v":-0.22},{"d":"2025-02-09","v":0.0},{"d":"2025-02-16","v":-0.03},{"d":"2025-02-23","v":-0.12},{"d":"2025-03-02","v":-0.7},{"d":"2025-03-09","v":-1.57},{"d":"2025-03-16","v":-1.52},{"d":"2025-03-23","v":-1.89},{"d":"2025-03-30","v":-1.07},{"d":"2025-04-06","v":-0.79},{"d":"2025-04-13","v":0.0},{"d":"2025-04-20","v":-0.32},{"d":"2025-04-27","v":-0.04},{"d":"2025-05-04","v":-0.92},{"d":"2025-05-11","v":-0.71},{"d":"2025-05-18","v":-1.28},{"d":"2025-05-25","v":-0.91},{"d":"2025-06-01","v":-1.61},{"d":"2025-06-08","v":-1.09},{"d":"2025-06-15","v":-0.08},{"d":"2025-06-22","v":-0.47},{"d":"2025-06-29","v":-1.09},{"d":"2025-07-06","v":-0.96},{"d":"2025-07-13","v":-0.54},{"d":"2025-07-20","v":-0.29},{"d":"2025-07-27","v":-0.9},{"d":"2025-08-03","v":-1.08},{"d":"2025-08-10","v":-0.82},{"d":"2025-08-17","v":-0.12},{"d":"2025-08-24","v":-0.68},{"d":"2025-08-31","v":-1.32},{"d":"2025-09-07","v":-0.6},{"d":"2025-09-14","v":0.0},{"d":"2025-09-21","v":-0.46},{"d":"2025-09-28","v":-0.62},{"d":"2025-10-05","v":0.0},{"d":"2025-10-12","v":-0.54},{"d":"2025-10-19","v":-0.22},{"d":"2025-10-26","v":-1.03},{"d":"2025-11-02","v":-0.37},{"d":"2025-11-09","v":-0.26},{"d":"2025-11-16","v":0.0},{"d":"2025-11-23","v":-0.8},{"d":"2025-11-30","v":0.0},{"d":"2025-12-07","v":-0.06},{"d":"2025-12-14","v":-0.27},{"d":"2025-12-21","v":-0.71},{"d":"2025-12-28","v":-0.11},{"d":"2026-01-04","v":0.0},{"d":"2026-01-11","v":-0.57},{"d":"2026-01-18","v":-0.83},{"d":"2026-01-25","v":-0.46},{"d":"2026-02-01","v":-1.21},{"d":"2026-02-08","v":-0.81},{"d":"2026-02-15","v":-0.53},{"d":"2026-02-22","v":-0.59},{"d":"2026-03-01","v":-0.53},{"d":"2026-03-08","v":0.0},{"d":"2026-03-15","v":0.0},{"d":"2026-03-22","v":0.0},{"d":"2026-03-29","v":0.0},{"d":"2026-04-05","v":-0.39},{"d":"2026-04-12","v":-0.04},{"d":"2026-04-19","v":-0.01},{"d":"2026-04-26","v":-0.11},{"d":"2026-05-03","v":0.0},{"d":"2026-05-10","v":0.0},{"d":"2026-05-17","v":-0.79},{"d":"2026-05-24","v":-0.81},{"d":"2026-05-31","v":-1.81},{"d":"2026-06-07","v":-2.27},{"d":"2026-06-14","v":-2.93},{"d":"2026-06-21","v":-2.46},{"d":"2026-06-28","v":-3.06},{"d":"2026-07-05","v":-2.99},{"d":"2026-07-12","v":-3.3},{"d":"2026-07-19","v":-3.53},{"d":"2026-07-26","v":-2.96},{"d":"2026-08-02","v":-3.49},{"d":"2026-08-09","v":-2.23},{"d":"2026-08-16","v":-1.8},{"d":"2026-08-23","v":-2.06}],"frontier":[{"leverage":1.0,"cagr":0.0605,"vol":0.041,"sharpe":1.4532,"maxdd":-0.0768,"calmar":0.7884,"monthly_mean":0.005,"monthly_median":0.0037,"worst_month":-0.0185,"pct_months_pos":0.6607},{"leverage":2.0,"cagr":0.1228,"vol":0.082,"sharpe":1.4532,"maxdd":-0.1491,"calmar":0.8236,"monthly_mean":0.01,"monthly_median":0.0074,"worst_month":-0.0369,"pct_months_pos":0.6607},{"leverage":3.0,"cagr":0.1867,"vol":0.123,"sharpe":1.4532,"maxdd":-0.2171,"calmar":0.86,"monthly_mean":0.015,"monthly_median":0.011,"worst_month":-0.0552,"pct_months_pos":0.6518},{"leverage":4.0,"cagr":0.2522,"vol":0.1641,"sharpe":1.4532,"maxdd":-0.281,"calmar":0.8976,"monthly_mean":0.0201,"monthly_median":0.0144,"worst_month":-0.0734,"pct_months_pos":0.6518},{"leverage":5.0,"cagr":0.3191,"vol":0.2051,"sharpe":1.4532,"maxdd":-0.3408,"calmar":0.9363,"monthly_mean":0.0253,"monthly_median":0.0176,"worst_month":-0.0915,"pct_months_pos":0.6518},{"leverage":6.0,"cagr":0.3872,"vol":0.2461,"sharpe":1.4532,"maxdd":-0.3967,"calmar":0.9761,"monthly_mean":0.0304,"monthly_median":0.0205,"worst_month":-0.1094,"pct_months_pos":0.6429},{"leverage":8.0,"cagr":0.5265,"vol":0.3281,"sharpe":1.4532,"maxdd":-0.4973,"calmar":1.0588,"monthly_mean":0.0409,"monthly_median":0.0263,"worst_month":-0.1448,"pct_months_pos":0.6429},{"leverage":10.0,"cagr":0.6688,"vol":0.4101,"sharpe":1.4532,"maxdd":-0.5842,"calmar":1.1448,"monthly_mean":0.0516,"monthly_median":0.0319,"worst_month":-0.1797,"pct_months_pos":0.6429}],"blocks":[{"block":"2013-2015","sharpe":1.92,"cagr":8.69,"maxdd":-5.98},{"block":"2016-2018","sharpe":1.08,"cagr":3.97,"maxdd":-4.29},{"block":"2019-2021","sharpe":1.23,"cagr":5.21,"maxdd":-4.87},{"block":"2022-2023","sharpe":0.64,"cagr":2.08,"maxdd":-7.49},{"block":"2024-2026","sharpe":1.66,"cagr":13.43,"maxdd":-7.07}],"cost_sens":[{"x":0.5,"spread":0.125,"cagr":9.52,"sharpe":2.23},{"x":1.0,"spread":0.25,"cagr":6.05,"sharpe":1.45},{"x":1.5,"spread":0.375,"cagr":2.69,"sharpe":0.67},{"x":2.0,"spread":0.5,"cagr":-0.56,"sharpe":-0.12},{"x":3.0,"spread":0.75,"cagr":-6.76,"sharpe":-1.67}],"session_pooled":{"bps":5.93,"n":3505,"t":9.22},"other_pooled":{"bps":-0.34,"n":17544,"t":-1.09}}</script>
 <script>
 (function(){
@@ -483,6 +862,7 @@ const D = JSON.parse(document.getElementById("payload").textContent);
 const NS = "http://www.w3.org/2000/svg";
 const tip = document.getElementById("tip");
 
+const LANGS = {};
 const el = (n, a) => { const e = document.createElementNS(NS, n);
   for (const k in a) if (a[k] !== null && a[k] !== undefined) e.setAttribute(k, a[k]); return e; };
 const fmt = (v, d) => (v >= 0 ? "+" : "−") + Math.abs(v).toFixed(d === undefined ? 2 : d);
@@ -515,13 +895,14 @@ function bindTip(node, html){
   node.addEventListener("mouseleave", hideTip);
 }
 
+function buildAll(sfx, L){
+
 /* ---------------- 1. hours of the New York day ---------------- */
 (function(){
-  const host = document.getElementById("c-hours");
+  const host = document.getElementById("c-hours" + sfx);
   const W = 900, H = 330, P = {t:22, r:16, b:52, l:46};
   const s = svg(host, W, H);
-  s.appendChild(el("title", {})).textContent =
-    "Mean gold return by hour of the New York day; the 18:00 bar dominates";
+  s.appendChild(el("title", {})).textContent = L.t1;
   const hours = Array.from({length:24}, (_, h) => {
     const f = D.hourly.find(x => x.h === h); return {h, bps: f ? f.bps : null}; });
   const vals = hours.filter(d => d.h !== 17).map(d => d.bps);
@@ -535,7 +916,7 @@ function bindTip(node, html){
     s.appendChild(el("line", {x1:P.l, x2:W-P.r, y1:Y(g), y2:Y(g), class:"gridline"}));
     s.appendChild(el("text", {x:P.l-9, y:Y(g)+4, class:"axis", "text-anchor":"end"})).textContent = g;
   }
-  s.appendChild(el("text", {x:P.l-9, y:P.t-8, class:"axis", "text-anchor":"end"})).textContent = "bps";
+  s.appendChild(el("text", {x:P.l-9, y:P.t-8, class:"axis", "text-anchor":"end"})).textContent = L.bps;
   s.appendChild(el("line", {x1:P.l, x2:W-P.r, y1:Y(0), y2:Y(0), class:"zline"}));
 
   hours.forEach(d => {
@@ -544,7 +925,7 @@ function bindTip(node, html){
       s.appendChild(el("rect", {x, y:P.t, width:w, height:ih, fill:"var(--grid)", rx:3}));
       const t = el("text", {x:x + w/2, y:P.t + ih/2, class:"axis", "text-anchor":"middle",
                             transform:`rotate(-90 ${x+w/2} ${P.t+ih/2})`});
-      t.textContent = "market closed"; s.appendChild(t);
+      t.textContent = L.closed; s.appendChild(t);
       return;
     }
     const on = d.h === 18;
@@ -552,7 +933,7 @@ function bindTip(node, html){
       fill: on ? "var(--brass)" : "var(--ink-3)",
       "fill-opacity": on ? 1 : .34, class:"hit"});
     s.appendChild(p);
-    bindTip(p, `<b>${String(d.h).padStart(2,"0")}:00 New York</b><br>${fmt(d.bps)} bps mean${on?"<br>the session bar":""}`);
+    bindTip(p, `<b>${String(d.h).padStart(2,"0")}:00 ${L.ny}</b><br>${fmt(d.bps)} ${L.meanbps}${on?"<br>"+L.theSession:""}`);
     if (on){
       s.appendChild(el("text", {x:x + w/2, y:Y(d.bps) - 9, class:"dlabel", "text-anchor":"middle"}))
         .textContent = "+4.73";
@@ -564,16 +945,15 @@ function bindTip(node, html){
     }
   });
   s.appendChild(el("text", {x:P.l + iw/2, y:H - 10, class:"axis", "text-anchor":"middle"}))
-    .textContent = "hour of the New York trading day";
+    .textContent = L.xhours;
 })();
 
 /* ---------------- 2. session bar vs rest, by year ---------------- */
 (function(){
-  const host = document.getElementById("c-years");
+  const host = document.getElementById("c-years" + sfx);
   const W = 900, H = 340, P = {t:22, r:16, b:50, l:46};
   const s = svg(host, W, H);
-  s.appendChild(el("title", {})).textContent =
-    "Session bar positive in all fourteen years; other bars hover around zero";
+  s.appendChild(el("title", {})).textContent = L.t2;
   const yrs = D.session_by_year.map(x => x.y);
   const other = Object.fromEntries(D.other_by_year.map(x => [x.y, x.bps]));
   const all = D.session_by_year.map(x => x.bps).concat(Object.values(other));
@@ -586,18 +966,18 @@ function bindTip(node, html){
     s.appendChild(el("line", {x1:P.l, x2:W-P.r, y1:Y(g), y2:Y(g), class:"gridline"}));
     s.appendChild(el("text", {x:P.l-9, y:Y(g)+4, class:"axis", "text-anchor":"end"})).textContent = g;
   }
-  s.appendChild(el("text", {x:P.l-9, y:P.t-8, class:"axis", "text-anchor":"end"})).textContent = "bps";
+  s.appendChild(el("text", {x:P.l-9, y:P.t-8, class:"axis", "text-anchor":"end"})).textContent = L.bps;
   s.appendChild(el("line", {x1:P.l, x2:W-P.r, y1:Y(0), y2:Y(0), class:"zline"}));
 
   D.session_by_year.forEach((d, i) => {
     const gx = P.l + i * gw + 5;
     const a = el("path", {d:barPath(gx, bw - 1, Y(0), Y(d.bps), 4), fill:"var(--brass)", class:"hit"});
     s.appendChild(a);
-    bindTip(a, `<b>${d.y} &middot; session bar</b><br>${fmt(d.bps)} bps mean`);
+    bindTip(a, `<b>${d.y} &middot; ${L.sessionBar}</b><br>${fmt(d.bps)} ${L.meanbps}`);
     const ov = other[d.y];
     const b = el("path", {d:barPath(gx + bw + 1, bw - 1, Y(0), Y(ov), 4), fill:"var(--blue)", class:"hit"});
     s.appendChild(b);
-    bindTip(b, `<b>${d.y} &middot; all other bars</b><br>${fmt(ov)} bps mean`);
+    bindTip(b, `<b>${d.y} &middot; ${L.otherBars}</b><br>${fmt(ov)} ${L.meanbps}`);
     s.appendChild(el("text", {x:gx + bw, y:H - P.b + 19, class:"axis", "text-anchor":"middle"}))
       .textContent = String(d.y).slice(2);
   });
@@ -605,10 +985,10 @@ function bindTip(node, html){
 
 /* ---------------- 3. equity curve ---------------- */
 (function(){
-  const host = document.getElementById("c-eq");
+  const host = document.getElementById("c-eq" + sfx);
   const W = 900, H = 300, P = {t:20, r:20, b:40, l:52};
   const s = svg(host, W, H);
-  s.appendChild(el("title", {})).textContent = "Unlevered equity curve growing from 1.00 to 1.73";
+  s.appendChild(el("title", {})).textContent = L.t3;
   const pts = D.equity, n = pts.length;
   const vs = pts.map(p => p.v);
   const hi = Math.ceil(Math.max(...vs) * 10) / 10, lo = Math.floor(Math.min(...vs) * 10) / 10;
@@ -657,10 +1037,10 @@ function bindTip(node, html){
 
 /* ---------------- 4. drawdown ---------------- */
 (function(){
-  const host = document.getElementById("c-dd");
+  const host = document.getElementById("c-dd" + sfx);
   const W = 900, H = 190, P = {t:18, r:20, b:34, l:52};
   const s = svg(host, W, H);
-  s.appendChild(el("title", {})).textContent = "Drawdown never exceeds 7.7 per cent";
+  s.appendChild(el("title", {})).textContent = L.t4;
   const pts = D.drawdown, n = pts.length;
   const lo = Math.floor(Math.min(...pts.map(p => p.v)));
   const iw = W - P.l - P.r, ih = H - P.t - P.b;
@@ -670,6 +1050,7 @@ function bindTip(node, html){
     s.appendChild(el("line", {x1:P.l, x2:W-P.r, y1:Y(g), y2:Y(g), class:"gridline"}));
     s.appendChild(el("text", {x:P.l-9, y:Y(g)+4, class:"axis", "text-anchor":"end"})).textContent = g;
   }
+  s.appendChild(el("text", {x:P.l-9, y:P.t-6, class:"axis", "text-anchor":"end"})).textContent = "%";
   const dline = pts.map((p,i) => `${i?"L":"M"}${X(i).toFixed(1)},${Y(p.v).toFixed(1)}`).join("");
   s.appendChild(el("path", {d:`${dline}L${X(n-1)},${Y(0)}L${P.l},${Y(0)}Z`,
     fill:"var(--neg)", "fill-opacity":.16}));
@@ -679,17 +1060,17 @@ function bindTip(node, html){
   hit.addEventListener("mousemove", e => {
     const bb = s.getBoundingClientRect();
     const i = Math.max(0, Math.min(n-1, Math.round((((e.clientX-bb.left)/bb.width*W) - P.l)/iw*(n-1))));
-    showTip(e, `<b>${pts[i].d}</b><br>${pts[i].v.toFixed(2)}% from peak`);
+    showTip(e, `<b>${pts[i].d}</b><br>${pts[i].v.toFixed(2)}% ${L.fromPeak}`);
   });
   hit.addEventListener("mouseleave", hideTip);
 })();
 
 /* ---------------- 5. cost sensitivity ---------------- */
 (function(){
-  const host = document.getElementById("c-cost");
+  const host = document.getElementById("c-cost" + sfx);
   const W = 900, H = 260, P = {t:24, r:16, b:56, l:52};
   const s = svg(host, W, H);
-  s.appendChild(el("title", {})).textContent = "Sharpe falls below zero at twice the assumed cost";
+  s.appendChild(el("title", {})).textContent = L.t5;
   const pts = D.cost_sens;
   const hi = 2.5, lo = -2;
   const iw = W - P.l - P.r, ih = H - P.t - P.b;
@@ -699,7 +1080,7 @@ function bindTip(node, html){
     s.appendChild(el("line", {x1:P.l, x2:W-P.r, y1:Y(g), y2:Y(g), class:"gridline"}));
     s.appendChild(el("text", {x:P.l-9, y:Y(g)+4, class:"axis", "text-anchor":"end"})).textContent = g;
   }
-  s.appendChild(el("text", {x:P.l-9, y:P.t-8, class:"axis", "text-anchor":"end"})).textContent = "Sharpe";
+  s.appendChild(el("text", {x:P.l-9, y:P.t-8, class:"axis", "text-anchor":"end"})).textContent = L.sharpe;
   s.appendChild(el("line", {x1:P.l, x2:W-P.r, y1:Y(0), y2:Y(0), class:"zline"}));
   pts.forEach((d, i) => {
     const x = P.l + i*gw + (gw-bw)/2;
@@ -707,7 +1088,7 @@ function bindTip(node, html){
     const p = el("path", {d:barPath(x, bw, Y(0), Y(d.sharpe), 4),
       fill: good ? "var(--pos)" : "var(--neg)", class:"hit"});
     s.appendChild(p);
-    bindTip(p, `<b>${d.x}× cost &middot; spread $${d.spread.toFixed(2)}</b><br>Sharpe ${d.sharpe.toFixed(2)} &middot; CAGR ${fmt(d.cagr,1)}%`);
+    bindTip(p, `<b>${d.x}× ${L.cost} &middot; ${L.spread} $${d.spread.toFixed(2)}</b><br>${L.sharpe} ${d.sharpe.toFixed(2)} &middot; ${fmt(d.cagr,1)}%`);
     s.appendChild(el("text", {x:x+bw/2, y: good ? Y(d.sharpe)-9 : Y(d.sharpe)+18,
       class:"dlabel", "text-anchor":"middle"})).textContent = d.sharpe.toFixed(2);
     s.appendChild(el("text", {x:x+bw/2, y:H-P.b+20, class:"axis", "text-anchor":"middle"}))
@@ -716,19 +1097,19 @@ function bindTip(node, html){
       "font-size":10})).textContent = "$" + d.spread.toFixed(2);
   });
   s.appendChild(el("text", {x:P.l+iw/2, y:H-6, class:"axis", "text-anchor":"middle"}))
-    .textContent = "transaction-cost multiple (gold spread below)";
+    .textContent = L.xcost;
 })();
 
 /* ---------------- tables ---------------- */
 (function(){
-  const tb = document.getElementById("t-frontier");
+  const tb = document.getElementById("t-frontier" + sfx);
   const worst = Math.min(...D.frontier.map(f => f.maxdd));
   D.frontier.forEach(f => {
     const tr = document.createElement("tr");
     if (f.leverage === 3) tr.className = "mark";
     const pc = v => (v*100).toFixed(2) + "%";
     tr.innerHTML =
-      `<td>${f.leverage}×${f.leverage===3?' <span style="font-size:.7rem;letter-spacing:.06em;color:var(--brass-text)">RECOMMENDED</span>':""}</td>`
+      `<td>${f.leverage}×${f.leverage===3?' <span style="font-size:.7rem;letter-spacing:.06em;color:var(--brass-text)">' + L.recommended + '</span>':""}</td>`
     + `<td class="num">${pc(f.monthly_mean)}</td>`
     + `<td class="num">${pc(f.cagr)}</td>`
     + `<td class="num">${pc(f.vol)}</td>`
@@ -736,13 +1117,63 @@ function bindTip(node, html){
     + `<td class="num neg">${pc(f.worst_month)}</td>`;
     tb.appendChild(tr);
   });
-  const bb = document.getElementById("t-blocks");
+  const bb = document.getElementById("t-blocks" + sfx);
   D.blocks.forEach(b => {
     const tr = document.createElement("tr");
     tr.innerHTML = `<td>${b.block}</td><td class="num">${b.sharpe.toFixed(2)}</td>`
       + `<td class="num pos">+${b.cagr.toFixed(2)}%</td><td class="num neg">${b.maxdd.toFixed(2)}%</td>`;
     bb.appendChild(tr);
   });
+})();
+
+}  /* end buildAll */
+
+/* ---------------- copy for each language ---------------- */
+const EN = {
+  bps:"bps", closed:"market closed", xhours:"hour of the New York trading day",
+  ny:"New York", meanbps:"bps mean", sessionBar:"session bar", otherBars:"all other bars",
+  theSession:"the session bar", fromPeak:"from peak", sharpe:"Sharpe",
+  xcost:"transaction-cost multiple (gold spread below)", cost:"cost", spread:"spread",
+  recommended:"RECOMMENDED",
+  t1:"Mean gold return by hour of the New York day; the 18:00 bar dominates",
+  t2:"Session bar positive in all fourteen years; other bars hover around zero",
+  t3:"Unlevered equity curve growing from 1.00 to 1.73",
+  t4:"Drawdown never exceeds 7.7 per cent",
+  t5:"Sharpe falls below zero at twice the assumed cost"
+};
+const FA = {
+  bps:"واحد", closed:"بازار بسته", xhours:"ساعت روز معاملاتی نیویورک",
+  ny:"نیویورک", meanbps:"واحد پایه (میانگین)", sessionBar:"کندل نشست", otherBars:"سایر کندل‌ها",
+  theSession:"کندل نشست", fromPeak:"پایین‌تر از سقف", sharpe:"شارپ",
+  xcost:"ضریب هزینهٔ معاملاتی (اسپرد طلا در پایین)", cost:"هزینه", spread:"اسپرد",
+  recommended:"پیشنهادی",
+  t1:"میانگین بازده طلا بر حسب ساعت نیویورک؛ کندل ۱۸:۰۰ غالب است",
+  t2:"کندل نشست در هر چهارده سال مثبت بوده؛ سایر کندل‌ها حول صفر",
+  t3:"منحنی سرمایهٔ بدون اهرم، از ۱.۰۰ به ۱.۷۳",
+  t4:"افت سرمایه هرگز از ۷.۷ درصد فراتر نرفته",
+  t5:"شارپ در دو برابر هزینهٔ فرض‌شده زیر صفر می‌رود"
+};
+buildAll("-en", EN);
+buildAll("-fa", FA);
+
+/* ---------------- language switch ---------------- */
+(function(){
+  const panes = {en:document.getElementById("pane-en"), fa:document.getElementById("pane-fa")};
+  const btns  = {en:document.getElementById("btn-en"), fa:document.getElementById("btn-fa")};
+  function set(lang, remember){
+    for (const k in panes){
+      panes[k].hidden = k !== lang;
+      btns[k].setAttribute("aria-pressed", String(k === lang));
+    }
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
+    hideTip();
+    if (remember) { try { localStorage.setItem("lang", lang); } catch (e) {} }
+  }
+  for (const k in btns) btns[k].addEventListener("click", () => set(k, true));
+  let saved = null;
+  try { saved = localStorage.getItem("lang"); } catch (e) {}
+  set(saved === "fa" || saved === "en" ? saved : "en", false);
 })();
 })();
 </script>
