@@ -26,7 +26,7 @@ def sim(tf, hold, risk_usd, cost_mult=1.0, entry_mult=2.0, stop_atr=4.0):
     """Flat risk_usd per trade. Position = risk_usd / (stop_atr * ATR)."""
     df=data.load('xauusd',tf); ent=entries(df)
     cm=costs.scaled('xauusd',cost_mult)
-    o,h,lo=df.open.to_numpy(float),df.high.to_numpy(float),df.low.to_numpy(float)
+    o,lo=df.open.to_numpy(float),df.low.to_numpy(float)
     a=atr(df,20).to_numpy(float); idx=df.index; n=len(df)
     lr,_=costs.financing_rates('xauusd',idx,cm)
     hrs=np.zeros(n); hrs[:-1]=np.diff(idx.values).astype('timedelta64[s]').astype(float)/3600
